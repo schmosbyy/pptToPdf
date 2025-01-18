@@ -110,8 +110,9 @@ def overlay_video_with_shape(pptx_directory, output_directory, extracted_video_u
                     1,  # Rectangle shape
                     Inches(left / 914400), Inches(top / 914400), Inches(width / 914400), Inches(height / 914400)
                 )
-                shape.fill.solid()
-                shape.fill.fore_color.rgb = RGBColor(255, 0, 0)
+                shape.fill.background()
+                # shape.fill.fore_color.rgb = RGBColor(255, 255, 255)  # White, but you could also try a transparent equivalent.
+                # shape.fill.transparency = 1.0  # Fully transparent
 
         # Save the modified presentation
         presentation.save(output_file)
