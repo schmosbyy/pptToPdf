@@ -83,7 +83,7 @@ def overlay_video_with_shape(pptx_directory, output_directory, extracted_video_u
         presentation = Presentation(pptx_path)
         output_file = os.path.join(output_directory, pptx_file)
         
-        # Iterate through the slides and overlay a red rectangle where video is found
+        # Iterate through the slides and overlay a transparent rectangle where video is found
         for slide_index, video_url in video_data:
             
             # Extract the slide number from the string (if it's the XML path)
@@ -100,19 +100,22 @@ def overlay_video_with_shape(pptx_directory, output_directory, extracted_video_u
             media_shapes_info = list_media_shapes(slide)
             print(f"Media shapes found on slide {slide_num}: {media_shapes_info}")
             
-            # Iterate over each media shape and overlay the red rectangle using its position, width, and height
+            # Iterate over each media shape and overlay the transparent rectangle using its position, width, and height
             for media in media_shapes_info:
                 left, top = media['Position']
                 width, height = media['Width'], media['Height']
                 
-                # Add the red shape using the position, width, and height of the media shape
+                # Add the transparent shape using the position, width, and height of the media shape
                 shape = slide.shapes.add_shape(
                     1,  # Rectangle shape
                     Inches(left / 914400), Inches(top / 914400), Inches(width / 914400), Inches(height / 914400)
                 )
-                shape.fill.background()
-                # shape.fill.fore_color.rgb = RGBColor(255, 255, 255)  # White, but you could also try a transparent equivalent.
-                # shape.fill.transparency = 1.0  # Fully transparent
+                shape.fill.background()  # Transparent fill
+
+                # Set hyperlink to the extracted video URL for the current slide
+                video_link = video_url
+                link = shape.click_action
+                link.hyperlink.address = video_link
 
         # Save the modified presentation
         presentation.save(output_file)
@@ -124,5 +127,5 @@ output_directory = "output"
 # Extract video URLs
 extracted_video_urls = extract_video_urls_from_pptx(pptx_directory)
 
-# Overlay red shapes on slides with video URLs
+# Overlay transparent shapes on slides with video URLs
 overlay_video_with_shape(pptx_directory, output_directory, extracted_video_urls)
