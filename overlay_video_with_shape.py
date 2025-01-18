@@ -100,20 +100,12 @@ def overlay_video_with_shape(pptx_directory, output_directory, extracted_video_u
             media_shapes_info = list_media_shapes(slide)
             print(f"Media shapes found on slide {slide_num}: {media_shapes_info}")
             
-            # Call the function to extract video position from the slide XML
-            with zipfile.ZipFile(pptx_path, 'r') as pptx_zip:
-                position = extract_video_position_from_slide(pptx_zip, slide_num)
+            # Iterate over each media shape and overlay the red rectangle using its position, width, and height
+            for media in media_shapes_info:
+                left, top = media['Position']
+                width, height = media['Width'], media['Height']
                 
-                # Randomly place the red box on the slide if no specific position is found
-                if position:
-                    left, top, width, height = position
-                else:
-                    left = random.randint(0, 8000000)  # Random left position (in EMUs)
-                    top = random.randint(0, 8000000)  # Random top position (in EMUs)
-                    width = 3000000  # Width of the box (in EMUs)
-                    height = 1000000  # Height of the box (in EMUs)
-
-                # Add the red shape at a random location
+                # Add the red shape using the position, width, and height of the media shape
                 shape = slide.shapes.add_shape(
                     1,  # Rectangle shape
                     Inches(left / 914400), Inches(top / 914400), Inches(width / 914400), Inches(height / 914400)
