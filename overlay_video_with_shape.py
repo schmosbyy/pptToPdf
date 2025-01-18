@@ -12,6 +12,26 @@ import re
 def emu_to_inches(emu):
     return emu / 914400.0
 
+def list_media_shapes(slide):
+    """
+    List only media shapes (e.g., videos or multimedia elements) in a slide, 
+    including their position, width, and height.
+    """
+    media_shapes_info = []
+
+    # Iterate through all shapes in the slide
+    for shape in slide.shapes:
+        # Check if the shape is of type MEDIA
+        if shape.shape_type == 16:  # MEDIA type (e.g., video)
+            media_shapes_info.append({
+                'Type': shape.shape_type,
+                'Position': (shape.left, shape.top),
+                'Width': shape.width,
+                'Height': shape.height
+            })
+
+    return media_shapes_info
+
 def extract_video_position_from_slide(pptx_zip, slide_num):
     """
     Extract the position (left, top, width, height) of the video from the slide's XML.
@@ -76,15 +96,22 @@ def overlay_video_with_shape(pptx_directory, output_directory, extracted_video_u
             # Then use it to access the slide
             slide = presentation.slides[slide_num - 1]  # 1-based to 0-based index
                     
+            # List and print all media shapes for the current slide
+            media_shapes_info = list_media_shapes(slide)
+            print(f"Media shapes found on slide {slide_num}: {media_shapes_info}")
+            
             # Call the function to extract video position from the slide XML
             with zipfile.ZipFile(pptx_path, 'r') as pptx_zip:
                 position = extract_video_position_from_slide(pptx_zip, slide_num)
                 
-                # Randomly place the red box on the slide
-                left = random.randint(0, 8000000)  # Random left position (in EMUs)
-                top = random.randint(0, 8000000)  # Random top position (in EMUs)
-                width = 3000000  # Width of the box (in EMUs)
-                height = 1000000  # Height of the box (in EMUs)
+                # Randomly place the red box on the slide if no specific position is found
+                if position:
+                    left, top, width, height = position
+                else:
+                    left = random.randint(0, 8000000)  # Random left position (in EMUs)
+                    top = random.randint(0, 8000000)  # Random top position (in EMUs)
+                    width = 3000000  # Width of the box (in EMUs)
+                    height = 1000000  # Height of the box (in EMUs)
 
                 # Add the red shape at a random location
                 shape = slide.shapes.add_shape(
