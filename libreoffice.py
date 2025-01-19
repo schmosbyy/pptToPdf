@@ -22,19 +22,19 @@ def get_libreoffice_path():
         raise RuntimeError(f"Unsupported operating system: {system}")
 
 
-def convert_to_pdf(input_file):
+def convert_to_pdf(input_file,output_file):
     """Convert a single PPTX file to PDF using LibreOffice."""
     libreoffice_path = get_libreoffice_path()
     cmd = [
         libreoffice_path,
         "--headless",  # Run in headless mode (no GUI)
         "--convert-to", "pdf",  # Convert to PDF format
-        "--outdir", OUTPUT_DIR,  # Save PDF in the output directory
+        "--outdir", output_file,  # Save PDF in the output directory
         input_file,  # Input file
     ]
     try:
         subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        print(f"Converted: {input_file} -> {OUTPUT_DIR}")
+        print(f"Converted: {input_file} -> {output_file}")
 
         # Check if the PDF file has been created
         pdf_file = input_file.replace(".pptx", ".pdf")

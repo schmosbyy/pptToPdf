@@ -11,7 +11,6 @@ from libreoffice import convert_to_pdf
 
 # Directory paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 LIBREOFFICE_DIR = os.path.join(BASE_DIR, "libreoffice")
 
 # Helper function to convert EMUs to Inches
@@ -79,7 +78,7 @@ def extract_video_position_from_slide(pptx_zip, slide_num):
 
 def overlay_video_with_shape(pptx_directory, output_directory, extracted_video_urls):
     # Ensure the output directory exists
-    output_directory = os.path.abspath(output_directory)
+    OUTPUT_DIR = output_directory
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
 
@@ -147,10 +146,7 @@ def overlay_video_with_shape(pptx_directory, output_directory, extracted_video_u
         # Save the modified presentation
         presentation.save(output_file)
 
-def main():
-    pptx_directory = "ppt"
-    output_directory = "output"
-
+def main(pptx_directory, output_directory):
     extracted_video_urls = extract_video_urls_from_pptx(pptx_directory)
 
     overlay_video_with_shape(pptx_directory, output_directory, extracted_video_urls)
@@ -159,7 +155,8 @@ def main():
     for filename in os.listdir(output_directory):
         if filename.endswith(".pptx"):
             input_path = os.path.join(output_directory, filename)
-            convert_to_pdf(input_path)  # Calling the function to convert the PPTX to PDF
+            output_path = os.path.join(output_directory, f"{os.path.splitext(filename)[0]}.pdf")
+            convert_to_pdf(input_path, output_path)# Calling the function to convert the PPTX to PDF
 
     print(f"All conversions completed. PDFs saved in {output_directory}")
 
