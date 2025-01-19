@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>SFWidgets.Toolbar service</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 24.8 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" aria-haspopup="true" aria-expanded="false" aria-controls="modules-nav">Module</button><nav id="modules-nav" hidden=""></nav>
+</div></div></header><aside class="leftside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><div id="SearchFrame"><div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in bookmarks for chosen module" dir="auto"><div class="nav-container" tabindex="0"><nav class="index" dir="auto"></nav></div>
+</div></div>
+<div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+  <a name="SFWidgets-sf_toolbar"></a>
+    <a name="bm_id261582733781987"></a>
+      <meta itemprop="keywords" content="Toolbar service">
+    
+  
+
+  <a name="abstract"></a>
+    <h1 id="hd_id731582733781114" dir="auto">
+<a name="ToolbarService"></a><span class="literal">SFWidgets</span>.<span class="literal">Toolbar</span> service</h1>
+    <p id="par_id571700837631557" class="paragraph" dir="auto">The <span class="literal">Toolbar</span> service allows to retrieve information related to the toolbars available for a specific document window. With this service it is possible to:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id891589189452545" class="listitem" dir="auto">Toggle the visibility of specific toolbars.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id811589189463041" class="listitem" dir="auto">Access information about the buttons available in each toolbar.</p>
+      </li>
+    </ul>
+  
+  <p id="par_id141700851608146" class="paragraph" dir="auto">Each LibreOffice application has its own set of available toolbars. This service handles both built-in and custom toolbars.</p>
+  <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id181700851890467" dir="auto">The status bar and the menu bar are not considered toolbars in the context of this service.</p></div>
+</div>
+<br>
+
+  <h2 id="hd_id581582885621841" dir="auto">Service invocation</h2>
+  <p id="par_id141609955500101" class="paragraph" dir="auto">Before using the <span class="literal">Toolbar</span> service the <span class="literal">ScriptForge</span> library needs to be loaded or imported:</p>
+  <div class="embedded">
+<a name="importLibs"></a>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id901528999850603" dir="auto">• Basic macros require to load <span class="literal">ScriptForge</span> library using the following statement:<br><span class="literal">GlobalScope.BasicLibraries.loadLibrary("ScriptForge")</span><br><br>• Python scripts require an import from <span class="literal">scriptforge</span> module:<br><span class="literal">from scriptforge import CreateScriptService</span>
+    </p></div>
+</div>
+<br>
+  </div>
+
+  <p id="par_id411700851985942" class="paragraph" dir="auto">The <span class="literal">Toolbar</span> service is invoked using the <span class="literal">Toolbars</span> method, which is available in <a target="_top" href="en-US/text/sbasic/shared/03/sf_document.html">SFDocuments.Document</a> service.</p>
+  <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+  <p id="par_id771700853155061" class="paragraph" dir="auto">The example below gets an <span class="literal">Array</span> with the names of the toolbars available in the current document.</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    oDoc = CreateScriptService("Document", ThisComponent)
+    arrToolbars = oDoc.Toolbars()
+    MsgBox SF_String.Represent(arrToolbars)
+  </code></pre></div>
+  <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id961700853354817" dir="auto">Use the <span class="literal">Toolbars</span> method without arguments to retrieve an array with available toolbar names.</p></div>
+</div>
+<br>
+  <p id="par_id171700853415555" class="paragraph" dir="auto">The example below toggles the visibility of the <span class="menuitem">Standard</span> toolbar:</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    oDoc = CreateScriptService("Document", ThisComponent)
+    toolbar = oDoc.Toolbars("standardbar")
+    toolbar.Visible = Not toolbar.Visible
+  </code></pre></div>
+  
+  <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    bas = CreateScriptService("Basic")
+    doc = CreateScriptService("Document", bas.ThisComponent)
+    arr_toolbars = doc.Toolbars()
+    bas.MsgBox(repr(toolbars))
+  </code></pre></div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    bas = CreateScriptService("Basic")
+    doc = CreateScriptService("Document", bas.ThisComponent)
+    toolbar = doc.Toolbars("standardbar")
+    toolbar.Visible = not toolbar.Visible
+  </code></pre></div>
+
+  <a name="bm_id81611339709014"></a>
+    <meta itemprop="keywords" content="Toolbar service,BuiltIn property">
+    <meta itemprop="keywords" content="Toolbar service,Docked property">
+    <meta itemprop="keywords" content="Toolbar service,HasGlobalScope property">
+    <meta itemprop="keywords" content="Toolbar service,Name property">
+    <meta itemprop="keywords" content="Toolbar service,ResourceURL property">
+    <meta itemprop="keywords" content="Toolbar service,Visible property">
+    <meta itemprop="keywords" content="Toolbar service,XUIElement property">
+  
+  <h2 id="hd_id351582885195476" dir="auto">Properties</h2>
+  <a name="properties_toc"></a>
+    <table border="1" class="" cellpadding="0" cellspacing="0">
+      <tr>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id41582885195836" class="tableheadintable" dir="auto">Name</p>
+        </th>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id31582885195372" class="tableheadintable" dir="auto">Readonly</p>
+        </th>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id31582885195238" class="tableheadintable" dir="auto">Type</p>
+        </th>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id931582885195131" class="tableheadintable" dir="auto">Description</p>
+        </th>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id7715828856553" class="tablecontentintable" dir="auto">BuiltIn</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655779" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655525" class="tablecontentintable" dir="auto">Boolean</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655885" class="tablecontentintable" dir="auto">Returns <span class="literal">True</span> when the toolbar is part of the set of standard toolbars shipped with LibreOffice.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655313" class="tablecontentintable" dir="auto">Docked</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655669" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885623525" class="tablecontentintable" dir="auto">Boolean</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885657885" class="tablecontentintable" dir="auto">Returns <span class="literal">True</span> when the toolbar is active in the window and docked.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655394" class="tablecontentintable" dir="auto">HasGlobalScope</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655710" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885651142" class="tablecontentintable" dir="auto">Boolean</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655102" class="tablecontentintable" dir="auto">Returns <span class="literal">True</span> when the toolbar is available in all documents of the same type.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655332" class="tablecontentintable" dir="auto">Name</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655205" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655787" class="tablecontentintable" dir="auto">String</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655369" class="tablecontentintable" dir="auto">Returns the name of the toolbar.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655349" class="tablecontentintable" dir="auto">ResourceURL</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655966" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885605065" class="tablecontentintable" dir="auto">String</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655812" class="tablecontentintable" dir="auto">Returns the resource URL of the toolbar, in the form <span class="literal">private:toolbar/toolbar_name</span>.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655387" class="tablecontentintable" dir="auto">Visible</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655212" class="tablecontentintable" dir="auto">No</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655373" class="tablecontentintable" dir="auto">Boolean</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655344" class="tablecontentintable" dir="auto">Returns <span class="literal">True</span> when the toolbar is active and visible in the document window.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655311" class="tablecontentintable" dir="auto">XUIElement</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655788" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655522" class="tablecontentintable" dir="auto">UNO Object</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655062" class="tablecontentintable" dir="auto">Returns the <a target="_blank" href="https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XUIElement.html">com.sun.star.ui.XUIElement</a> UNO object that represents the toolbar.</p>
+        </td>
+      </tr>
+    </table>
+<br>
+  
+
+  <a name="methods_toc"></a>
+  <table border="1" class="" cellpadding="0" cellspacing="0">
+   <tr>
+     <th rowspan="" colspan="3" class="tableheadcell" dir="auto"><p id="par_id651606319520519" class="tableheadintable" dir="auto">List of Methods in the Toolbar Service</p></th>
+   </tr>
+   <tr>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id761611086279902" class="tablecontentintable" dir="auto">
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_toolbar.html#ToolbarButtons">ToolbarButtons</a><br>
+           </p>
+       </td>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id141611086279902" class="tablecontentintable" dir="auto">
+           </p>
+       </td>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id761611086279903" class="tablecontentintable" dir="auto">
+           </p>
+       </td>
+   </tr>
+  </table>
+<br>
+  
+
+  <a name="ToolbarButtons"></a>
+    
+    <a name="bm_id92158919969883"></a>
+      <meta itemprop="keywords" content="Toolbar service,ToolbarButtons">
+    
+    <h2 id="hd_id201589199698251" dir="auto">ToolbarButtons</h2>
+    <p id="par_id93158919969864" class="paragraph" dir="auto">Returns an <span class="literal">Array</span> containing the names of all toolbar buttons when called without arguments.</p>
+    <p id="par_id421611148353046" class="paragraph" dir="auto">Provide the name of a toolbar button as argument to obtain a <span class="literal">ToolbarButton</span> service instance.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id181622827609276" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.ToolbarButtons(opt buttonname: str): any</span>
+    </p>
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+    <p id="par_id381701012526415" class="paragraph" dir="auto"><span class="emph">buttonname</span>: The name of a toolbar button in the current toolbar.</p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <p id="par_id601611148017930" class="paragraph" dir="auto">The example below returns the command executed when the button <span class="menuitem">New</span> is clicked in the <span class="menuitem">Standard</span> toolbar:</p>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oToolbar = oDoc.Toolbars("standardbar")
+      oToolbarButton = oToolbar.ToolbarButtons("New")
+      MsgBox oToolbarButton.OnClick
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      toolbar = doc.Toolbars("standardbar")
+      toolbar_button = toolbar.ToolbarButtons("New")
+      bas.MsgBox(toolbar_button.OnClick)
+    </code></pre></div>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id531701012694220" dir="auto">Inactive toolbars do not have buttons. Therefore, calling the <span class="literal">ToolbarButtons</span> method will make the toolbar visible.</p></div>
+</div>
+<br>
+  
+
+  <div class="embedded">
+<a name="SF_InternalUse"></a>
+      <div class="warning">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id851506659675843" dir="auto">All <span class="literal">ScriptForge</span> Basic routines or identifiers that are prefixed with an underscore character "_" are reserved for internal use. They are not meant be used in Basic macros or Python scripts.</p></div>
+</div>
+<br>
+    </div>
+  <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/sf_toolbarbutton.html"><span class="literal">SFWidgets</span>.<span class="literal">ToolbarButton</span> service</a></p></div>
+   </div>
+</div>
+</div>
+<div id="DonationFrame"></div>
+<footer><h2 style="text-align: center;"><a href="https://books.libreoffice.org" target="_blank">LibreOffice Books</a></h2>
+<div class="noteicon" dir="auto" style="display:flex;justify-content:center;">
+<img src="media/navigation/libo-writer.svg" alt="Writer Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-calc.svg" alt="Calc Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-impress.svg" alt="Impress Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-draw.svg" alt="Draw Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-base.svg" alt="Base Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-math.svg" alt="Math Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-symbol-black.svg" alt="Getting Started Icon" style="width:60px;height:60px;">
+</div>
+<div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03/sf_toolbar.xhp" target="_blank">/text/sbasic/shared/03/sf_toolbar.xhp</a></p>
+<p dir="auto">Title is: SFWidgets.Toolbar service</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>SFWidgets.ToolbarButton service</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 24.8 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" aria-haspopup="true" aria-expanded="false" aria-controls="modules-nav">Module</button><nav id="modules-nav" hidden=""></nav>
+</div></div></header><aside class="leftside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><div id="SearchFrame"><div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in bookmarks for chosen module" dir="auto"><div class="nav-container" tabindex="0"><nav class="index" dir="auto"></nav></div>
+</div></div>
+<div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+  <a name="SFWidgets-sf_toolbarbutton"></a>
+    <a name="bm_id261582733781987"></a>
+      <meta itemprop="keywords" content="ToolbarButton service">
+    
+  
+
+  <a name="abstract"></a>
+    <h1 id="hd_id731582733781114" dir="auto">
+<a name="ToolbarButtonService"></a><span class="literal">SFWidgets</span>.<span class="literal">ToolbarButton</span> service</h1>
+    <p id="par_id571700837631557" class="paragraph" dir="auto">The <span class="literal">ToolbarButton</span> service allows to retrieve information related to the toolbar buttons available in a given toolbar. With this service it is possible to:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id891589189452545" class="listitem" dir="auto">Toggle the visibility of toolbar elements.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id811589189463041" class="listitem" dir="auto">Execute the command associated with a given toolbar button.</p>
+      </li>
+    </ul>
+  
+
+  <h2 id="hd_id581582885621841" dir="auto">Service invocation</h2>
+  <p id="par_id141609955500101" class="paragraph" dir="auto">Before using the <span class="literal">ToolbarButton</span> service the <span class="literal">ScriptForge</span> library needs to be loaded or imported:</p>
+  <div class="embedded">
+<a name="importLibs"></a>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id901528999850603" dir="auto">• Basic macros require to load <span class="literal">ScriptForge</span> library using the following statement:<br><span class="literal">GlobalScope.BasicLibraries.loadLibrary("ScriptForge")</span><br><br>• Python scripts require an import from <span class="literal">scriptforge</span> module:<br><span class="literal">from scriptforge import CreateScriptService</span>
+    </p></div>
+</div>
+<br>
+  </div>
+
+  <p id="par_id411700851985942" class="paragraph" dir="auto">The <span class="literal">ToolbarButton</span> service is invoked using the <span class="literal">ToolbarButtons</span> method from the <span class="literal">Toolbar</span> service.</p>
+
+  <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+  <p id="par_id771700853155061" class="paragraph" dir="auto">The example below retrieves the names of all buttons available in the <span class="menuitem">Standard</span> toolbar.</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    oDoc = CreateScriptService("Document", ThisComponent)
+    oToolbar = oDoc.Toolbars("standardbar")
+    arrToolbarButtons = oToolbar.ToolbarButtons()
+    MsgBox SF_String.Represent(arrToolbarButtons)
+  </code></pre></div>
+  <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id961700853354817" dir="auto">Use the <span class="literal">ToolbarButtons</span> method without arguments to retrieve an array with all available toolbar button names.</p></div>
+</div>
+<br>
+  <p id="par_id171700853415555" class="paragraph" dir="auto">The example below toggles the visibility of the <span class="menuitem">Print</span> button in the <span class="menuitem">Standard</span> toolbar:</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    oDoc = CreateScriptService("Document", ThisComponent)
+    oToolbar = oDoc.Toolbars("standardbar")
+    oToolbarButton = oToolbar.ToolbarButtons("Print")
+    oToolbarButton.Visible = Not oToolbarButton.Visible
+  </code></pre></div>
+  <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id981701021131646" dir="auto">The button name passed as argument to the <span class="literal">ToolbarButtons</span> method is the localized button name defined in the <span class="menuitem">Tools - Customize - Toolbars</span> dialog.</p></div>
+</div>
+<br>
+  <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id531701012694220" dir="auto">Inactive toolbars do not have buttons. Therefore, calling the <span class="literal">ToolbarButtons</span> method will make the toolbar visible.</p></div>
+</div>
+<br>
+
+  <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    bas = CreateScriptService("Basic")
+    doc = CreateScriptService("Document", bas.ThisComponent)
+    toolbar = doc.Toolbars("standardbar")
+    arr_toolbar_buttons = toolbar.ToolbarButtons()
+    bas.MsgBox(repr(arr_toolbar_buttons))
+  </code></pre></div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    bas = CreateScriptService("Basic")
+    doc = CreateScriptService("Document", bas.ThisComponent)
+    toolbar = doc.Toolbars("standardbar")
+    toolbar_button = toolbar.ToolbarButtons("Print")
+    toolbar_button.Visible = not toolbar_button.Visible
+  </code></pre></div>
+
+  <a name="bm_id81611339709014"></a>
+    <meta itemprop="keywords" content="ToolbarButton service,Caption property">
+    <meta itemprop="keywords" content="ToolbarButton service,Height property">
+    <meta itemprop="keywords" content="ToolbarButton service,Index property">
+    <meta itemprop="keywords" content="ToolbarButton service,OnClick property">
+    <meta itemprop="keywords" content="ToolbarButton service,Parent property">
+    <meta itemprop="keywords" content="ToolbarButton service,TipText property">
+    <meta itemprop="keywords" content="ToolbarButton service,Visible property">
+    <meta itemprop="keywords" content="ToolbarButton service,Width property">
+    <meta itemprop="keywords" content="ToolbarButton service,X property">
+    <meta itemprop="keywords" content="ToolbarButton service,Y property">
+  
+  <h2 id="hd_id351582885195476" dir="auto">Properties</h2>
+  <a name="properties_toc"></a>
+    <table border="1" class="" cellpadding="0" cellspacing="0">
+      <tr>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id41582885195836" class="tableheadintable" dir="auto">Name</p>
+        </th>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id31582885195372" class="tableheadintable" dir="auto">Readonly</p>
+        </th>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id31582885195238" class="tableheadintable" dir="auto">Type</p>
+        </th>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id931582885195131" class="tableheadintable" dir="auto">Description</p>
+        </th>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id7715828856553" class="tablecontentintable" dir="auto">Caption</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655779" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655525" class="tablecontentintable" dir="auto">String</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655885" class="tablecontentintable" dir="auto">Returns the name of the button.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655313" class="tablecontentintable" dir="auto">Height</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655669" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885623525" class="tablecontentintable" dir="auto">Long</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885657885" class="tablecontentintable" dir="auto">Returns the height of the button, in pixels.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655394" class="tablecontentintable" dir="auto">Index</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655710" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885651142" class="tablecontentintable" dir="auto">Long</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655102" class="tablecontentintable" dir="auto">Returns the index of the button in its parent toolbar.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655332" class="tablecontentintable" dir="auto">OnClick</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655205" class="tablecontentintable" dir="auto">No</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655787" class="tablecontentintable" dir="auto">String</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655369" class="tablecontentintable" dir="auto">The UNO command or script executed when the button is pressed. Read the Wiki page <a target="_blank" href="https://wiki.documentfoundation.org/Documentation/DevGuide/Scripting_Framework#Scripting_Framework_URI_Specification">Scripting Framework URI Specification</a> to learn more on how to define a URI string.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655349" class="tablecontentintable" dir="auto">Parent</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655966" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885605065" class="tablecontentintable" dir="auto"><span class="literal">Toolbar</span> service</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655812" class="tablecontentintable" dir="auto">Returns a <span class="literal">Toolbar</span> service instance corresponding to the parent toolbar of the current toolbar button.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655387" class="tablecontentintable" dir="auto">TipText</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655212" class="tablecontentintable" dir="auto">No</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655373" class="tablecontentintable" dir="auto">String</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655344" class="tablecontentintable" dir="auto">Specifies the tooltip text shown when the user hovers over the toolbar button.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655311" class="tablecontentintable" dir="auto">Visible</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655788" class="tablecontentintable" dir="auto">No</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655522" class="tablecontentintable" dir="auto">Boolean</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655062" class="tablecontentintable" dir="auto">Specifies whether the toolbar button is visible or not.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885652661" class="tablecontentintable" dir="auto">Width</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885651058" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885659542" class="tablecontentintable" dir="auto">Long</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885653342" class="tablecontentintable" dir="auto">Returns the width of the button, in pixels.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885604761" class="tablecontentintable" dir="auto">X</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885636258" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885699442" class="tablecontentintable" dir="auto">Long</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885641742" class="tablecontentintable" dir="auto">Returns the X (horizontal) coordinate of the top-left corner of the button, in pixels.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885604161" class="tablecontentintable" dir="auto">Y</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885603158" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885603642" class="tablecontentintable" dir="auto">Long</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885609942" class="tablecontentintable" dir="auto">Returns the Y (vertical) coordinate of the top-left corner of the button, in pixels.</p>
+        </td>
+      </tr>
+    </table>
+<br>
+  
+
+  <h2 id="hd_id501701094012462" dir="auto">Use of <span class="literal">ToolbarButton</span> alongside the <span class="literal">PopupMenu</span> service</h2>
+  <p id="par_id731701094077095" class="paragraph" dir="auto">A common use case of the properties <span class="literal">X</span> and <span class="literal">Y</span> described above is to open a popup menu in the position where the toolbar button is located.</p>
+  <p id="par_id761701094138529" class="paragraph" dir="auto">Suppose you create the script below and associate it with a button named "My Button" in the <span class="literal">standardbar</span>. When it is clicked, a popup menu will be shown with 3 options for the user to select.</p>
+  <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    Sub OpenPopupMenu()
+        GlobalScope.BasicLibraries.LoadLibrary("ScriptForge")
+        oDoc = CreateScriptService("Document", ThisComponent)
+        oToolbar = oDoc.Toolbars("standardbar")
+        oButton = oToolbar.ToolbarButtons("My Button")
+        oPopup = CreateScriptService("SFWidgets.PopupMenu", , oButton.X, oButton.Y + oButton.Height)
+        oPopup.AddItem("Item A", "A")
+        oPopup.AddItem("Item B", "B")
+        oPopup.AddItem("Item C", "C")
+        strResponse = oPopup.Execute(False)
+        MsgBox "Your choice: " &amp; strResponse
+    End Sub
+  </code></pre></div>
+  <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    def open_popup_menu(args=None):
+        bas = CreateScriptService("Basic")
+        doc = CreateScriptService("Document", bas.ThisComponent)
+        toolbar = doc.Toolbars("standardbar")
+        toolbutton = toolbar.ToolbarButtons("My Button")
+        popup = CreateScriptService("PopupMenu", None, toolbutton.X, toolbutton.Y + toolbutton.Height)
+        popup.AddItem("Item A", "A")
+        popup.AddItem("Item B", "B")
+        popup.AddItem("Item C", "C")
+        response = popup.Execute(False)
+        bas.MsgBox(f"Your choice: {response}")
+  </code></pre></div>
+
+  <a name="methods_toc"></a>
+  <table border="1" class="" cellpadding="0" cellspacing="0">
+   <tr>
+     <th rowspan="" colspan="3" class="tableheadcell" dir="auto"><p id="par_id651606319520519" class="tableheadintable" dir="auto">List of Methods in the ToolbarButton Service</p></th>
+   </tr>
+   <tr>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id761611086279902" class="tablecontentintable" dir="auto">
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_toolbarbutton.html#Execute">Execute</a><br>
+           </p>
+       </td>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id141611086279902" class="tablecontentintable" dir="auto">
+           </p>
+       </td>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id761611086279903" class="tablecontentintable" dir="auto">
+           </p>
+       </td>
+   </tr>
+  </table>
+<br>
+  
+
+  <a name="Execute"></a>
+    
+    <a name="bm_id92158919969883"></a>
+      <meta itemprop="keywords" content="ToolbarButton service,Execute">
+    
+    <h2 id="hd_id201589199698251" dir="auto">Execute</h2>
+    <p id="par_id93158919969864" class="paragraph" dir="auto">Executes the command or script associated with the toolbar button.</p>
+    <p id="par_id191701023292148" class="paragraph" dir="auto">This method returns the value returned by the command or script executed.</p>
+    <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id731701023160247" dir="auto">Use the <span class="literal">OnClick</span> property to determine the command or script that shall be executed. If the command/script does not return any value, then <span class="literal">Null</span> is returned.</p></div>
+</div>
+<br>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id181622827609276" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.Execute(): any</span>
+    </p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <p id="par_id601611148017930" class="paragraph" dir="auto">The example below executes the <span class="menuitem">Print</span> button from the <span class="menuitem">Standard</span> toolbar:</p>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oDoc = CreateScriptService("Document", ThisComponent)
+      oToolbar = oDoc.Toolbars("standardbar")
+      oToolbarButton = oToolbar.ToolbarButtons("Print")
+      oToolbarButton.Execute()
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      bas = CreateScriptService("Basic")
+    doc = CreateScriptService("Document", bas.ThisComponent)
+    toolbar = doc.Toolbars("standardbar")
+    toolbar_button = toolbar.ToolbarButtons("Print")
+    toolbar_button.Execute()
+    </code></pre></div>
+  
+
+  <div class="embedded">
+<a name="SF_InternalUse"></a>
+      <div class="warning">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id851506659675843" dir="auto">All <span class="literal">ScriptForge</span> Basic routines or identifiers that are prefixed with an underscore character "_" are reserved for internal use. They are not meant be used in Basic macros or Python scripts.</p></div>
+</div>
+<br>
+    </div>
+  <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/sf_toolbar.html"><span class="literal">SFWidgets</span>.<span class="literal">Toolbar</span> service</a></p></div>
+   </div>
+</div>
+</div>
+<div id="DonationFrame"></div>
+<footer><h2 style="text-align: center;"><a href="https://books.libreoffice.org" target="_blank">LibreOffice Books</a></h2>
+<div class="noteicon" dir="auto" style="display:flex;justify-content:center;">
+<img src="media/navigation/libo-writer.svg" alt="Writer Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-calc.svg" alt="Calc Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-impress.svg" alt="Impress Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-draw.svg" alt="Draw Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-base.svg" alt="Base Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-math.svg" alt="Math Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-symbol-black.svg" alt="Getting Started Icon" style="width:60px;height:60px;">
+</div>
+<div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03/sf_toolbarbutton.xhp" target="_blank">/text/sbasic/shared/03/sf_toolbarbutton.xhp</a></p>
+<p dir="auto">Title is: SFWidgets.ToolbarButton service</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

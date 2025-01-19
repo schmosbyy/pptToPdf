@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>FILTER function</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 24.8 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" aria-haspopup="true" aria-expanded="false" aria-controls="modules-nav">Module</button><nav id="modules-nav" hidden=""></nav>
+</div></div></header><aside class="leftside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><div id="SearchFrame"><div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in bookmarks for chosen module" dir="auto"><div class="nav-container" tabindex="0"><nav class="index" dir="auto"></nav></div>
+</div></div>
+<div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+<a name="bm_id221708806478124"></a>
+<a name="bm_id361708283183878"></a>
+<meta itemprop="keywords" content="FILTER function">
+
+<a name="filter"></a>
+    <h1 id="hd_id901708806478126" dir="auto">
+<a name="h1"></a>FILTER</h1>
+    <p id="par_id771708806478128" class="paragraph" dir="auto">Filters a data range or array based on specified conditions.</p>
+
+<div class="embedded">
+<a name="func_head_syntax"></a>
+    <h3 id="hd_id126511265112651" dir="auto">Syntax</h3>
+  </div>
+<p id="par_id211708281649651" class="code" dir="auto">FILTER( Range; Criteria [; Return if empty])</p>
+<p id="par_id411709395137111" class="paragraph" dir="auto"><span class="emph">Range</span>: The array or range to filter.</p>
+<p id="par_id471709395141324" class="paragraph" dir="auto"><span class="emph">Criteria</span>: A boolean array whose height (filtering by columns) or width (filtering by rows) is the same as the array, used to select data from the <span class="emph">Range</span>.</p>
+<p id="par_id421709395146863" class="paragraph" dir="auto"><span class="emph">Result if empty</span>: (optional) the value to return if all values in the <span class="emph">Criteria</span> array are empty (filter return nothing).</p>
+<div class="embedded">
+<a name="sampledata01"></a>
+
+        <div class="embedded">
+<a name="sectionexample"></a>
+        <h4 id="hd_id281171" dir="auto">Example</h4>
+    </div>
+        <p id="par_id1000040" class="paragraph" dir="auto">The following data will be used as example </p>
+
+        <table border="1" class="" cellpadding="0" cellspacing="0">
+            <tr>
+                <td rowspan="" colspan="" dir="auto">
+                </td>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000050" class="tableheadintable" dir="auto">A</p>
+                </th>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000060" class="tableheadintable" dir="auto">B</p>
+                </th>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000070" class="tableheadintable" dir="auto">C</p>
+                </th>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000080" class="tableheadintable" dir="auto">1</p>
+                </th>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000090" class="tableheadintable" dir="auto">Maths</p>
+                </th>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000100" class="tableheadintable" dir="auto">Physics</p>
+                </th>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000110" class="tableheadintable" dir="auto">Biology</p>
+                </th>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000120" class="tableheadintable" dir="auto">2</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000130" class="tablecontentintable" dir="auto">47</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000140" class="tablecontentintable" dir="auto">67</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000150" class="tablecontentintable" dir="auto">33</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000160" class="tableheadintable" dir="auto">3</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000170" class="tablecontentintable" dir="auto">36</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000180" class="tablecontentintable" dir="auto">68</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000190" class="tablecontentintable" dir="auto">42</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000200" class="tableheadintable" dir="auto">4</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000210" class="tablecontentintable" dir="auto">40</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000220" class="tablecontentintable" dir="auto">65</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000230" class="tablecontentintable" dir="auto">44</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000240" class="tableheadintable" dir="auto">5</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000250" class="tablecontentintable" dir="auto">39</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000260" class="tablecontentintable" dir="auto">64</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000270" class="tablecontentintable" dir="auto">60</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000280" class="tableheadintable" dir="auto">6</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000290" class="tablecontentintable" dir="auto">38</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000300" class="tablecontentintable" dir="auto">43</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000310" class="tableheadintable" dir="auto">7</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000320" class="tablecontentintable" dir="auto">47</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000330" class="tablecontentintable" dir="auto">84</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000340" class="tablecontentintable" dir="auto">62</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000350" class="tableheadintable" dir="auto">8</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000360" class="tablecontentintable" dir="auto">29</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000370" class="tablecontentintable" dir="auto">80</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000380" class="tablecontentintable" dir="auto">51</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000390" class="tableheadintable" dir="auto">9</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000400" class="tablecontentintable" dir="auto">27</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000410" class="tablecontentintable" dir="auto">49</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000420" class="tablecontentintable" dir="auto">40</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000430" class="tableheadintable" dir="auto">10</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000440" class="tablecontentintable" dir="auto">57</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000450" class="tablecontentintable" dir="auto">49</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000460" class="tablecontentintable" dir="auto">12</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000470" class="tableheadintable" dir="auto">11</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000480" class="tablecontentintable" dir="auto">56</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000490" class="tablecontentintable" dir="auto">33</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000500" class="tablecontentintable" dir="auto">60</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000510" class="tableheadintable" dir="auto">12</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000520" class="tablecontentintable" dir="auto">57</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id1000530" class="tableheadintable" dir="auto">13</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1000540" class="tablecontentintable" dir="auto">26</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                </td>
+            </tr>
+        </table>
+<br>
+
+    </div>
+<p id="par_id21709506838932" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">{=FILTER(A2:C13;A2:A13&gt;50)}</span> returns the array containing all grades with Maths grade above 50. Note that this is an <a target="_top" href="en-US/text/scalc/01/04060107.html#creating_array_formulas">array formula</a>.</p>
+        <table border="1" class="" cellpadding="0" cellspacing="0">
+            <tr>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id631716824543362" class="tablecontentintable" dir="auto">57</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id771716824543363" class="tablecontentintable" dir="auto">49</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id1001716824543364" class="tablecontentintable" dir="auto">12</p>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id921716824543365" class="tablecontentintable" dir="auto">56</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id441716824543367" class="tablecontentintable" dir="auto">33</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id441716824543368" class="tablecontentintable" dir="auto">60</p>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id341716824688536" class="tablecontentintable" dir="auto">57</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto"></td>
+                <td rowspan="" colspan="" dir="auto"></td>
+            </tr>
+        </table>
+<br>
+<p id="par_id561709507935610" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">{=FILTER(A2:C13;B2:B13&gt;90;"No results")}</span>  Returns the string "No results", since no grade on Physics is above 90.</p>
+
+<div class="embedded">
+<a name="sectiontechinfo"></a>
+        <h4 id="hd_id301640873452726" dir="auto">Technical information</h4>
+    </div>
+<div class="embedded">
+<a name="24.8"></a>
+        <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id491708280768121" dir="auto">This function is available since LibreOffice 24.8.</p></div>
+</div>
+<br>
+    </div>
+<div class="embedded">
+<a name="notODFF"></a>
+        <p id="par_id251640873774457" class="paragraph" dir="auto">This function is not part of the <span class="emph">Open Document Format for Office Applications (OpenDocument) Version 1.3. Part 4: Recalculated Formula (OpenFormula) Format</span> standard. The name space is</p>
+    </div>
+<p id="par_id341640870986703" class="paragraph" dir="auto"><span class="literal">COM.MICROSOFT.FILTER</span></p>
+<a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+    <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id701677016751508" dir="auto"><a target="_blank" href="https://wiki.documentfoundation.org/Documentation/Calc_Functions/FILTER">FILTER wiki page</a>.</p></div>
+</div>
+<br>
+</div>
+</div>
+</div>
+<div id="DonationFrame"></div>
+<footer><h2 style="text-align: center;"><a href="https://books.libreoffice.org" target="_blank">LibreOffice Books</a></h2>
+<div class="noteicon" dir="auto" style="display:flex;justify-content:center;">
+<img src="media/navigation/libo-writer.svg" alt="Writer Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-calc.svg" alt="Calc Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-impress.svg" alt="Impress Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-draw.svg" alt="Draw Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-base.svg" alt="Base Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-math.svg" alt="Math Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-symbol-black.svg" alt="Getting Started Icon" style="width:60px;height:60px;">
+</div>
+<div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/scalc/01/func_filter.xhp" target="_blank">/text/scalc/01/func_filter.xhp</a></p>
+<p dir="auto">Title is: FILTER function</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>UNIQUE function</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 24.8 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" aria-haspopup="true" aria-expanded="false" aria-controls="modules-nav">Module</button><nav id="modules-nav" hidden=""></nav>
+</div></div></header><aside class="leftside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><div id="SearchFrame"><div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in bookmarks for chosen module" dir="auto"><div class="nav-container" tabindex="0"><nav class="index" dir="auto"></nav></div>
+</div></div>
+<div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+<a name="bm_id221708806478124"></a>
+<a name="bm_id361708283183878"></a>
+    <meta itemprop="keywords" content="UNIQUE function">
+
+<a name="unique"></a>
+    <h1 id="hd_id901708806478126" dir="auto">
+<a name="h1"></a>UNIQUE</h1>
+    <p id="par_id771708806478128" class="paragraph" dir="auto">Returns the array of unique values from a range or array of values.</p>
+
+<div class="embedded">
+<a name="func_head_syntax"></a>
+    <h3 id="hd_id126511265112651" dir="auto">Syntax</h3>
+  </div>
+<p id="par_id211708281649651" class="code" dir="auto">UNIQUE(Array, [By col], [Uniqueness])</p>
+<p id="par_id381715698113514" class="paragraph" dir="auto"><span class="emph">Array</span>: the range or array from which to return unique values.</p>
+<p id="par_id311715698119400" class="paragraph" dir="auto"><span class="emph">By col</span>: (optional) a logical value that indicates how to compare data: TRUE - compares data horizontally for a match of all cells in each column, across all columns. FALSE or omitted (default) - compares data vertically, for a match of all cells of each row, across all rows.</p>
+
+<p id="par_id531715698124705" class="paragraph" dir="auto"><span class="emph">Uniqueness</span>: (optional) A logical value that defines which values are considered unique. TRUE returns values that occur only once. The default is FALSE or omitted, which returns all distinct values in the range or array.</p>
+<div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id501715889339407" dir="auto">The UNIQUE function must be entered as an <a target="_top" href="en-US/text/scalc/01/04060107.html#creating_array_formulas">array formula</a>.</p></div>
+</div>
+<br>
+<div class="embedded">
+<a name="func_head_example"></a>
+    <h3 id="hd_id980889808898088" dir="auto">Examples</h3>
+  </div>
+<p id="par_id471715980557106" class="paragraph" dir="auto">Given the data table below, the examples returns unique occurrences of grades and age.</p>
+<div class="embedded">
+<a name="tbl_database_sample"></a>
+        <table border="1" class="" cellpadding="0" cellspacing="0">
+            <tr>
+                <td rowspan="" colspan="" dir="auto"></td>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3145232" class="tableheadintable" dir="auto">A</p>
+                </th>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3146316" class="tableheadintable" dir="auto">B</p>
+                </th>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3150297" class="tableheadintable" dir="auto">C</p>
+                </th>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3150344" class="tableheadintable" dir="auto">D</p>
+                </th>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3150785" class="tableheadintable" dir="auto">E</p>
+                </th>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3150090" class="tableheadintable" dir="auto">1</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3152992" class="tablecontentintable" dir="auto"><span class="emph">Name</span></p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3155532" class="tablecontentintable" dir="auto"><span class="emph">Grade</span></p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3156448" class="tablecontentintable" dir="auto"><span class="emph">Age</span></p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3154486" class="tablecontentintable" dir="auto"><span class="emph">Distance</span></p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3152899" class="tablecontentintable" dir="auto"><span class="emph">Weight</span></p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3153816" class="tableheadintable" dir="auto">2</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3151240" class="tablecontentintable" dir="auto">Andy</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3156016" class="tablecontentintable" dir="auto">3</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3145073" class="tablecontentintable" dir="auto">9</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3154956" class="tablecontentintable" dir="auto">150</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3153976" class="tablecontentintable" dir="auto">40</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3150894" class="tableheadintable" dir="auto">3</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3152870" class="tablecontentintable" dir="auto">Betty</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3149692" class="tablecontentintable" dir="auto">4</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3154652" class="tablecontentintable" dir="auto">10</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3149381" class="tablecontentintable" dir="auto">1000</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3153812" class="tablecontentintable" dir="auto">42</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3146965" class="tableheadintable" dir="auto">4</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3155596" class="tablecontentintable" dir="auto">Charles</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3147244" class="tablecontentintable" dir="auto">3</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3149871" class="tablecontentintable" dir="auto">10</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3155752" class="tablecontentintable" dir="auto">300</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3149052" class="tablecontentintable" dir="auto">51</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3146097" class="tableheadintable" dir="auto">5</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3147296" class="tablecontentintable" dir="auto">Daniel</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3150393" class="tablecontentintable" dir="auto">5</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3145236" class="tablecontentintable" dir="auto">11</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3150534" class="tablecontentintable" dir="auto">1200</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3150375" class="tablecontentintable" dir="auto">48</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3159121" class="tableheadintable" dir="auto">6</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3150456" class="tablecontentintable" dir="auto">Eva</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3146886" class="tablecontentintable" dir="auto">2</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3149945" class="tablecontentintable" dir="auto">8</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3157904" class="tablecontentintable" dir="auto">650</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3149352" class="tablecontentintable" dir="auto">33</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3150028" class="tableheadintable" dir="auto">7</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3145826" class="tablecontentintable" dir="auto">Frank</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3150743" class="tablecontentintable" dir="auto">2</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3154844" class="tablecontentintable" dir="auto">7</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3148435" class="tablecontentintable" dir="auto">300</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3148882" class="tablecontentintable" dir="auto">42</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3150140" class="tableheadintable" dir="auto">8</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3146137" class="tablecontentintable" dir="auto">Greta</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3148739" class="tablecontentintable" dir="auto">1</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3148583" class="tablecontentintable" dir="auto">7</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3154556" class="tablecontentintable" dir="auto">200</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3155255" class="tablecontentintable" dir="auto">36</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3145141" class="tableheadintable" dir="auto">9</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3153078" class="tablecontentintable" dir="auto">Harry</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3149955" class="tablecontentintable" dir="auto">3</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3150005" class="tablecontentintable" dir="auto">9</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3155951" class="tablecontentintable" dir="auto">1200</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3145169" class="tablecontentintable" dir="auto">44</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3153571" class="tableheadintable" dir="auto">10</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3148761" class="tablecontentintable" dir="auto">Irene</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3149877" class="tablecontentintable" dir="auto">2</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3154327" class="tablecontentintable" dir="auto">8</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3155435" class="tablecontentintable" dir="auto">1000</p>
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                    <p id="par_id3145353" class="tablecontentintable" dir="auto">42</p>
+                </td>
+            </tr>
+            <tr>
+                <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+                    <p id="par_id3150662" class="tableheadintable" dir="auto">11</p>
+                </th>
+                <td rowspan="" colspan="" dir="auto">
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                </td>
+                <td rowspan="" colspan="" dir="auto">
+                </td>
+            </tr>
+            </table>
+<br>
+        </div>
+<h3 id="hd_id931715984553129" dir="auto">Example 1</h3>
+<p id="par_id641715980827372" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">{=UNIQUE(B1:C10,FALSE(),FALSE())}</span> returns the array below. The grades and ages of the rows with name Andy and Harry are returned only once. The same for rows with name Eva and Irene.</p>
+<table border="1" class="" cellpadding="0" cellspacing="0">
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id641715983343641" class="paragraphintable" dir="auto"><span class="emph">Grade</span></p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id511715983350731" class="paragraphintable" dir="auto"><span class="emph">Age</span></p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id751715983361251" class="paragraphintable" dir="auto">3</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id51715983367115" class="paragraphintable" dir="auto">9</p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id791715983372155" class="paragraphintable" dir="auto">4</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id301715983377588" class="paragraphintable" dir="auto">10</p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id521715983383178" class="paragraphintable" dir="auto">3</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id881715983388786" class="paragraphintable" dir="auto">10</p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id1001715983394307" class="paragraphintable" dir="auto">5</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id451715983399066" class="paragraphintable" dir="auto">11</p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id451715983403906" class="paragraphintable" dir="auto">2</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id191715983413378" class="paragraphintable" dir="auto">8</p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id641715983418937" class="paragraphintable" dir="auto">2</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id311715983438778" class="paragraphintable" dir="auto">7</p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id391715983424898" class="paragraphintable" dir="auto">1</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id951715983443729" class="paragraphintable" dir="auto">7</p></td>
+</tr>
+</table>
+<br>
+<h3 id="hd_id981715984567844" dir="auto">Example 2</h3>
+<p id="par_id801715981230387" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">{=UNIQUE(B1:C10,FALSE(),TRUE())}</span>, with <span class="emph">Uniqueness</span> as TRUE. Returns the array below with the rows of Andy, Harry, Eva and Irene omitted because their combined grades and ages are not unique.</p>
+<table border="1" class="" cellpadding="0" cellspacing="0">
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id501715983764524" class="paragraphintable" dir="auto"><span class="emph">Grade</span></p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id31715983773608" class="paragraphintable" dir="auto"><span class="emph">Age</span></p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id611715983782594" class="paragraphintable" dir="auto">4</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id671715983787993" class="paragraphintable" dir="auto">10</p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id11715983792601" class="paragraphintable" dir="auto">3</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id441715983798113" class="paragraphintable" dir="auto">10</p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id311715983802580" class="paragraphintable" dir="auto">5</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id611715983807760" class="paragraphintable" dir="auto">11</p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id591715983811913" class="paragraphintable" dir="auto">2</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id971715983820239" class="paragraphintable" dir="auto">7</p></td>
+</tr>
+    <tr>
+<td rowspan="" colspan="" dir="auto"><p id="par_id551715983827423" class="paragraphintable" dir="auto">1</p></td>
+<td rowspan="" colspan="" dir="auto"><p id="par_id171715983833462" class="paragraphintable" dir="auto">7</p></td>
+</tr>
+</table>
+<br>
+
+<div class="embedded">
+<a name="sectiontechinfo"></a>
+        <h4 id="hd_id301640873452726" dir="auto">Technical information</h4>
+    </div>
+<div class="embedded">
+<a name="24.8"></a>
+        <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id491708280768121" dir="auto">This function is available since LibreOffice 24.8.</p></div>
+</div>
+<br>
+    </div>
+<div class="embedded">
+<a name="notODFF"></a>
+        <p id="par_id251640873774457" class="paragraph" dir="auto">This function is not part of the <span class="emph">Open Document Format for Office Applications (OpenDocument) Version 1.3. Part 4: Recalculated Formula (OpenFormula) Format</span> standard. The name space is</p>
+    </div>
+<p id="par_id341640870986703" class="paragraph" dir="auto"><span class="literal">COM.MICROSOFT.UNIQUE</span></p>
+<a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+    <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id701677016751508" dir="auto"><a target="_blank" href="https://wiki.documentfoundation.org/Documentation/Calc_Functions/UNIQUE">UNIQUE wiki page</a>.</p></div>
+</div>
+<br>
+</div>
+</div>
+</div>
+<div id="DonationFrame"></div>
+<footer><h2 style="text-align: center;"><a href="https://books.libreoffice.org" target="_blank">LibreOffice Books</a></h2>
+<div class="noteicon" dir="auto" style="display:flex;justify-content:center;">
+<img src="media/navigation/libo-writer.svg" alt="Writer Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-calc.svg" alt="Calc Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-impress.svg" alt="Impress Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-draw.svg" alt="Draw Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-base.svg" alt="Base Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-math.svg" alt="Math Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-symbol-black.svg" alt="Getting Started Icon" style="width:60px;height:60px;">
+</div>
+<div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/scalc/01/func_unique.xhp" target="_blank">/text/scalc/01/func_unique.xhp</a></p>
+<p dir="auto">Title is: UNIQUE function</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Consolidate Text Boxes</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 24.8 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" aria-haspopup="true" aria-expanded="false" aria-controls="modules-nav">Module</button><nav id="modules-nav" hidden=""></nav>
+</div></div></header><aside class="leftside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><div id="SearchFrame"><div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in bookmarks for chosen module" dir="auto"><div class="nav-container" tabindex="0"><nav class="index" dir="auto"></nav></div>
+</div></div>
+<div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+<a name="bm_id301623510996084"></a>
+<a name="bm_id371623524099696"></a>
+<meta itemprop="keywords" content="text box consolidation">
+<meta itemprop="keywords" content="join PDF lines,text box consolidation">
+<meta itemprop="keywords" content="combine text box,text box consolidation">
+<meta itemprop="keywords" content="combine text frames,text box consolidation">
+
+<a name="textboxconsolidation"></a>
+<h1 id="hd_id861623510996086" dir="auto">Consolidate Text</h1>
+<p id="par_id441623510996088" class="paragraph" dir="auto"><a name="textboxconsolidationv1"></a><span class="avis">Combine two or more selected text boxes into one.</span></p>
+
+<a name="howtoget"></a><div class="howtoget">
+<div><p class="howtogetheader" dir="auto"><a name="wie"></a>To access this command...</p></div>
+<div class="howtogetbody">
+  <div class="embedded">
+<a name="from_menu_bar"></a><h4 id="par_id441684934473786" dir="auto">From the menu bar:</h4>
+</div>
+<p id="par_id711623512060597" class="paragraph" dir="auto">Choose <span class="menuitem">Shape - Consolidate Text</span> when two or more text boxes are selected.</p>
+  <div class="embedded">
+<a name="from_context"></a><h4 id="par_id441684932173786" dir="auto">From the context menu:</h4>
+</div>
+<p id="par_id501623512080240" class="paragraph" dir="auto">Choose <span class="menuitem">Consolidate Text</span> when two or more text boxes are selected.</p>
+</div>
+</div>
+<br>
+<p id="par_id61623512950690" class="paragraph" dir="auto">Text box consolidation joins several text boxes into a single text box, enabling text reflow inside the resulting box.</p>
+<div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id141623511540551" dir="auto">The <span class="emph">Consolidate Text</span> command is especially useful for editing PDF documents with LibreOffice Draw.</p></div>
+</div>
+<br>
+<p id="par_id471623513979583" class="paragraph" dir="auto">The function inspects the text fragments to see if they end in sentence-ending punctuation. If not, then the next text box's content is appended to it instead of starting a new paragraph. You must manually fix paragraphing, and set paragraph properties after consolidation.</p>
+<h2 id="hd_id381623516529280" dir="auto">Remarks</h2>
+<ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+    <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id211623513189855" class="listitem" dir="auto">The resulting text box will be inserted into the current layer.</p>
+</li>
+<li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id61623516556624" class="listitem" dir="auto">The resulting text box will be unnamed.</p>
+</li>
+<li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id611623516624688" class="listitem" dir="auto">The title and description of the individual text boxes will be lost after consolidation.</p>
+</li>
+<li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id281623513291901" class="listitem" dir="auto">The previous text box objects are deleted after consolidation.</p>
+</li>
+<li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id531623515498932" class="listitem" dir="auto">When consolidating lists, the list's layout may be affected by the position of the punctuation. In this case, you will need to manually restore the layout. For example, when using the numbering of style "1.", the resulting list items may be split after the dot.</p>
+</li>
+<li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+    <p id="par_id931623525360411" class="listitem" dir="auto">For better results, combine adjacent text boxes with similar paragraph formatting. Character formatting inside the text boxes is preserved. When combining text boxes with different paragraph styles, you may need to manually restore the original text layout.</p>
+</li>
+</ul>
+<a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/shared/01/ref_pdf_export.html">Export as PDF</a></p></div>
+</div>
+</div>
+</div>
+<div id="DonationFrame"></div>
+<footer><h2 style="text-align: center;"><a href="https://books.libreoffice.org" target="_blank">LibreOffice Books</a></h2>
+<div class="noteicon" dir="auto" style="display:flex;justify-content:center;">
+<img src="media/navigation/libo-writer.svg" alt="Writer Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-calc.svg" alt="Calc Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-impress.svg" alt="Impress Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-draw.svg" alt="Draw Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-base.svg" alt="Base Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-math.svg" alt="Math Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-symbol-black.svg" alt="Getting Started Icon" style="width:60px;height:60px;">
+</div>
+<div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sdraw/01/consolidatetext.xhp" target="_blank">/text/sdraw/01/consolidatetext.xhp</a></p>
+<p dir="auto">Title is: Consolidate Text Boxes</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

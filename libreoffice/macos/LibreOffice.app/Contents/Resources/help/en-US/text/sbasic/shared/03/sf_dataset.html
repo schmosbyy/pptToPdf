@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>SFDatabases.Dataset service</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 24.8 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" aria-haspopup="true" aria-expanded="false" aria-controls="modules-nav">Module</button><nav id="modules-nav" hidden=""></nav>
+</div></div></header><aside class="leftside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><div id="SearchFrame"><div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in bookmarks for chosen module" dir="auto"><div class="nav-container" tabindex="0"><nav class="index" dir="auto"></nav></div>
+</div></div>
+<div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+  <a name="SFDatabases-sf_dataset"></a>
+    <a name="bm_id261582733781987"></a>
+      <meta itemprop="keywords" content="Dataset service">
+    
+  
+
+  <a name="abstract"></a>
+    <h1 id="hd_id731582733781114" dir="auto">
+<a name="DatasetService"></a><span class="literal">SFDatabases</span>.<span class="literal">Dataset</span> service</h1>
+    <p id="par_id571700837631557" class="paragraph" dir="auto">The <span class="literal">Dataset</span> service is used to represent tabular data produced by a database. With this service it is possible to:</p>
+    <ul itemprop="Unordered" itemscope="true" itemtype="http://schema.org/ItemList" dir="auto">
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id891589189452545" class="listitem" dir="auto">Navigate through and access the data in a dataset.</p>
+      </li>
+      <li itemprop="itemListElement" itemscope="true" itemtype="http://schema.org/ItemListUnordered" dir="auto">
+        <p id="par_id811589189463041" class="listitem" dir="auto">Update, insert and remove records in a dataset.</p>
+      </li>
+    </ul>
+  
+  <div class="warning">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id251701124711074" dir="auto">Updating and inserting records using the <span class="literal">Dataset</span> service is slower than using SQL statements. When updating or inserting large amounts of records, it is recommended to use SQL statements instead of using the methods in this service.</p></div>
+</div>
+<br>
+
+  <h2 id="hd_id581582885621841" dir="auto">Service invocation</h2>
+  <p id="par_id141609955500101" class="paragraph" dir="auto">Before using the <span class="literal">Dataset</span> service the <span class="literal">ScriptForge</span> library needs to be loaded or imported:</p>
+  <div class="embedded">
+<a name="importLibs"></a>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id901528999850603" dir="auto">• Basic macros require to load <span class="literal">ScriptForge</span> library using the following statement:<br><span class="literal">GlobalScope.BasicLibraries.loadLibrary("ScriptForge")</span><br><br>• Python scripts require an import from <span class="literal">scriptforge</span> module:<br><span class="literal">from scriptforge import CreateScriptService</span>
+    </p></div>
+</div>
+<br>
+  </div>
+
+  <p id="par_id411700851985942" class="paragraph" dir="auto">The <span class="literal">Dataset</span> service is invoked using the <span class="literal">CreateDataset</span> method, which can be called either from a <span class="literal">Database</span> service instance or from another <span class="literal">Dataset</span> instance.</p>
+
+  <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+  <p id="par_id771700853155061" class="paragraph" dir="auto">The following example creates a <span class="literal">Dataset</span> from the table "Customers" stored in a database file.</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    oDatabase = CreateScriptService("Database", "C:\MyDatabase.odb")
+    oDataset = oDatabase.CreateDataset("Customers")
+    With oDataset
+        Do While .MoveNext()
+            oValues = .Values()
+            ' ...
+        Loop
+        .CloseDataset()
+    End With
+  </code></pre></div>
+  <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id821701125782721" dir="auto">Upon the creation of the <span class="literal">Dataset</span>, the current record is positioned before the first record.</p></div>
+</div>
+<br>
+  <p id="par_id171700853415555" class="paragraph" dir="auto">The example below creates a <span class="literal">Dataset</span> instance by filtering the original dataset.</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    oNewDataset = oDataset.CreateDataset(Filter := "[City]='New York'")
+  </code></pre></div>
+
+  <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    database = CreateScriptService("Database", r"C:\MyDatabase.odb")
+    dataset = database.CreateDataset("Customers")
+    while dataset.MoveNext():
+        values = dataset.Values
+        # ...
+    dataset.CloseDataset()
+  </code></pre></div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    new_dataset = dataset.CreateDataset(filter = "[City]='New York'")
+  </code></pre></div>
+
+  <a name="bm_id81611339709014"></a>
+    <meta itemprop="keywords" content="Dataset service,BOF property">
+    <meta itemprop="keywords" content="Dataset service,DefaultValues property">
+    <meta itemprop="keywords" content="Dataset service,EOF property">
+    <meta itemprop="keywords" content="Dataset service,Fields property">
+    <meta itemprop="keywords" content="Dataset service,Filter property">
+    <meta itemprop="keywords" content="Dataset service,OrderBy property">
+    <meta itemprop="keywords" content="Dataset service,ParentDatabase property">
+    <meta itemprop="keywords" content="Dataset service,RowCount property">
+    <meta itemprop="keywords" content="Dataset service,RowNumber property">
+    <meta itemprop="keywords" content="Dataset service,Source property">
+    <meta itemprop="keywords" content="Dataset service,SourceType property">
+    <meta itemprop="keywords" content="Dataset service,UpdatableFields property">
+    <meta itemprop="keywords" content="Dataset service,Values property">
+    <meta itemprop="keywords" content="Dataset service,XRowSet property">
+  
+  <h2 id="hd_id351582885195476" dir="auto">Properties</h2>
+  <a name="properties_toc"></a>
+    <table border="1" class="" cellpadding="0" cellspacing="0">
+      <tr>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id41582885195836" class="tableheadintable" dir="auto">Name</p>
+        </th>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id31582885195372" class="tableheadintable" dir="auto">Readonly</p>
+        </th>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id31582885195238" class="tableheadintable" dir="auto">Type</p>
+        </th>
+        <th rowspan="" colspan="" class="tableheadcell" dir="auto">
+          <p id="par_id931582885195131" class="tableheadintable" dir="auto">Description</p>
+        </th>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id7715828856553" class="tablecontentintable" dir="auto">BOF</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655779" class="tablecontentintable" dir="auto">No</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655525" class="tablecontentintable" dir="auto">Boolean</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655885" class="tablecontentintable" dir="auto">Returns <span class="literal">True</span> if the current record position is before the first record in the dataset, otherwise returns <span class="literal">False</span>.</p>
+          <p id="par_id581582885655855" class="tablecontentintable" dir="auto">Set this property to <span class="literal">True</span> to move the cursor to the beginning of the dataset. Setting this property to <span class="literal">False</span> is ignored.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655313" class="tablecontentintable" dir="auto">DefaultValues</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655669" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885623525" class="tablecontentintable" dir="auto"><span class="literal">Dictionary</span> service</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885657885" class="tablecontentintable" dir="auto">Returns a <span class="literal">Dictionary</span> with the default values used for each field in the dataset. The fields or columns in the dataset are the keys in the dictionary.</p>
+          <p id="par_id581582885653105" class="tablecontentintable" dir="auto">The database field types are converted to their corresponding Basic/Python data types. When the field type is undefined, the default value is <span class="literal">Null</span> if the field is nullable or <span class="literal">Empty</span>.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655394" class="tablecontentintable" dir="auto">EOF</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655710" class="tablecontentintable" dir="auto">No</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885651142" class="tablecontentintable" dir="auto">Boolean</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885611885" class="tablecontentintable" dir="auto">Returns <span class="literal">True</span> if the current record position is after the last record in the dataset, otherwise returns <span class="literal">False</span>.</p>
+          <p id="par_id581582885609855" class="tablecontentintable" dir="auto">Set this property to <span class="literal">True</span> to move the cursor to the end of the dataset. Setting this property to <span class="literal">False</span> is ignored.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655332" class="tablecontentintable" dir="auto">Fields</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655205" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655787" class="tablecontentintable" dir="auto">Array</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655369" class="tablecontentintable" dir="auto">Returns an <span class="literal">Array</span> containing the names of all fields in the dataset.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655349" class="tablecontentintable" dir="auto">Filter</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655966" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885605065" class="tablecontentintable" dir="auto">String</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655812" class="tablecontentintable" dir="auto">Returns the filter applied in addition to the eventual <span class="literal">WHERE</span> clause(s) in the initial SQL statement. This property is expressed as a <span class="literal">WHERE</span> clause without the "WHERE" keyword.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655387" class="tablecontentintable" dir="auto">OrderBy</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655212" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655373" class="tablecontentintable" dir="auto">String</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655344" class="tablecontentintable" dir="auto">Returns the ordering clause that replaces the eventual <span class="literal">ORDER BY</span> clause present in the initial SQL statement. This property is expressed as a <span class="literal">ORDER BY</span> clause without the "ORDER BY" keywords.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885655311" class="tablecontentintable" dir="auto">ParentDatabase</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885655788" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885655522" class="tablecontentintable" dir="auto"><span class="literal">Database</span> service</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885655062" class="tablecontentintable" dir="auto">Returns the <span class="literal">Database</span> instance corresponding to the parent database of the current dataset.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885654161" class="tablecontentintable" dir="auto">RowCount</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582885650968" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582885653372" class="tablecontentintable" dir="auto">Long</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582885656472" class="tablecontentintable" dir="auto">Returns the exact number of records in the dataset.</p>
+          <p id="par_id581582885656491" class="tablecontentintable" dir="auto">Note that the evaluation of this property implies browsing the whole dataset, which may be costly depending on the dataset size.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885024161" class="tablecontentintable" dir="auto">RowNumber</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582886340968" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582887873372" class="tablecontentintable" dir="auto">Long</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582884026472" class="tablecontentintable" dir="auto">Returns the number of the current record starting at 1. Returns 0 if this property is unknown.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885025521" class="tablecontentintable" dir="auto">Source</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582886349968" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582887879362" class="tablecontentintable" dir="auto">String</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582884023472" class="tablecontentintable" dir="auto">Returns the source of the dataset. It can be either a table name, a query name or a SQL statement.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885447521" class="tablecontentintable" dir="auto">SourceType</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582886352968" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582887207362" class="tablecontentintable" dir="auto">String</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582884295472" class="tablecontentintable" dir="auto">Returns the source of the dataset. It can be one of the following string values: <span class="literal">TABLE</span>, <span class="literal">QUERY</span> or <span class="literal">SQL</span>.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885454221" class="tablecontentintable" dir="auto">UpdatableFields</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582886368268" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582887229662" class="tablecontentintable" dir="auto">Array</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582884255372" class="tablecontentintable" dir="auto">Returns an <span class="literal">Array</span> containing the names of the fields of the dataset that are updatable.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885004221" class="tablecontentintable" dir="auto">Values</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582886302268" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582887375662" class="tablecontentintable" dir="auto">Array</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582884370372" class="tablecontentintable" dir="auto">Returns a <span class="literal">Dictionary</span> containing the pairs (field name: value) of the current record in the dataset.</p>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id771582885065221" class="tablecontentintable" dir="auto">XRowSet</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id861582886325668" class="tablecontentintable" dir="auto">Yes</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id271582887376762" class="tablecontentintable" dir="auto"><span class="literal">UNO</span> object</p>
+        </td>
+        <td rowspan="" colspan="" dir="auto">
+          <p id="par_id581582884392072" class="tablecontentintable" dir="auto">Returns the <a target="_blank" href="https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1RowSet.html">com.sun.star.sdb.RowSet</a> UNO object representing the dataset.</p>
+        </td>
+      </tr>
+    </table>
+<br>
+  
+
+  <a name="methods_toc"></a>
+  <table border="1" class="" cellpadding="0" cellspacing="0">
+   <tr>
+     <th rowspan="" colspan="3" class="tableheadcell" dir="auto"><p id="par_id651606319520519" class="tableheadintable" dir="auto">List of Methods in the Dataset Service</p></th>
+   </tr>
+   <tr>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id761611086279902" class="tablecontentintable" dir="auto">
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#CloseDataset">CloseDataset</a><br>
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#CreateDataset">CreateDataset</a><br>
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#Delete">Delete</a><br>
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#ExportValueToFile">ExportValueToFile</a><br>
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#GetRows">GetRows</a><br>
+           </p>
+       </td>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id141611086279902" class="tablecontentintable" dir="auto">
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#GetValue">GetValue</a><br>
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#Insert">Insert</a><br>
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#MoveFirstLast">MoveFirst</a><br>
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#MoveFirstLast">MoveLast</a><br><br>
+           </p>
+       </td>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id761611086279903" class="tablecontentintable" dir="auto">
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#MoveNextPrevious">MoveNext</a><br>
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#MoveNextPrevious">MovePrevious</a><br>
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#Reload">Reload</a><br>
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_dataset.html#Update">Update</a><br><br>
+           </p>
+       </td>
+   </tr>
+  </table>
+<br>
+  
+
+  <a name="CloseDataset"></a>
+    
+    <a name="bm_id92158919969883"></a>
+      <meta itemprop="keywords" content="Dataset service,CloseDataset">
+    
+    <h2 id="hd_id201589199698251" dir="auto">CloseDataset</h2>
+    <p id="par_id93158919969864" class="paragraph" dir="auto">Closes the current dataset. This method returns <span class="literal">True</span> when successful.</p>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id781701179217081" dir="auto">It is recommended to close the dataset after its use to free resources.</p></div>
+</div>
+<br>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id181622827609276" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.CloseDataset(): bool</span>
+    </p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oDataset = oDatabase.CreateDataset("MyTable")
+      ' ...
+      oDataset.CloseDataset()
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      dataset = database.CreateDataset("MyTable")
+      # ...
+      dataset.CloseDataset()
+    </code></pre></div>
+  
+
+  <a name="CreateDataset"></a>
+    
+    <a name="bm_id92158919969443"></a>
+      <meta itemprop="keywords" content="Dataset service,CreateDataset">
+    
+    <h2 id="hd_id201589199660251" dir="auto">CreateDataset</h2>
+    <p id="par_id93158919343864" class="paragraph" dir="auto">Returns a <span class="literal">Dataset</span> service instance from an existing dataset by applying the specified filter and <span class="literal">ORDER BY</span> statements.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id140222827609276" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.CreateDataset(opt filter: str, opt orderby: str): svc</span>
+    </p>
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+    <p id="par_id381701012509515" class="paragraph" dir="auto"><span class="emph">filter</span>: Specifies the condition that records must match to be included in the returned dataset. This argument is expressed as a SQL <span class="literal">WHERE</span> statement without the "WHERE" keyword. If this argument is not specified, then the filter used in the current dataset is applied, otherwise the current filter is replaced by this argument.</p>
+    <p id="par_id381701012563515" class="paragraph" dir="auto"><span class="emph">orderby</span>: Specifies the ordering of the dataset as a SQL <span class="literal">ORDER BY</span> statement without the "ORDER BY" keyword. If this argument is not specified, then the sorting order used in the current dataset is applied, otherwise the current sorting order is replaced by this argument.</p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      ' Use an empty string to remove the current filter
+      oNewDataset = oDataset.CreateDataset(Filter := "")
+      ' Examples of common filters
+      oNewDataset = oDataset.CreateDataset(Filter := "[Name] = 'John'")
+      oNewDataset = oDataset.CreateDataset(Filter := "[Name] LIKE 'A'")
+      ' It is possible to append additional conditions to the current filter
+      oNewDataset = oDataset.CreateDataset(Filter := "(" &amp; oDataset.Filter &amp; ") AND [Name] LIKE 'A'")
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      new_dataset = dataset.CreateDataset(filter = "")
+      new_dataset = dataset.CreateDataset(filter = "[Name] = 'John'")
+      new_dataset = dataset.CreateDataset(filter = "[Name] LIKE 'A'")
+      new_dataset = dataset.CreateDataset(filter = f"({dataset.Filter}) AND [Name] LIKE 'A'")
+    </code></pre></div>
+  
+
+  <a name="Delete"></a>
+    
+    <a name="bm_id9215369969883"></a>
+      <meta itemprop="keywords" content="Dataset service,Delete">
+    
+    <h2 id="hd_id201589199650151" dir="auto">Delete</h2>
+    <p id="par_id93158919961074" class="paragraph" dir="auto">Deletes the current record from the dataset. This method returns <span class="literal">True</span> when successful.</p>
+    <p id="par_id101701180833688" class="paragraph" dir="auto">After this operation the cursor is positioned at the record immediately after the deleted record. If the deleted record is the last in the dataset, then the cursor is positioned after it and the property <span class="literal">EOF</span> returns <span class="literal">True</span>.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id195222827609276" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.Delete(): bool</span>
+    </p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oDataset.Delete()
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      dataset.Delete()
+    </code></pre></div>
+  
+
+  <a name="ExportValueToFile"></a>
+    
+    <a name="bm_id92153179969443"></a>
+      <meta itemprop="keywords" content="Dataset service,ExportValueToFile">
+    
+    <h2 id="hd_id201589196160251" dir="auto">ExportValueToFile</h2>
+    <p id="par_id93158955243864" class="paragraph" dir="auto">Exports the value of a binary field of the current record to the specified file.</p>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id171701181928026" dir="auto">If the specified field is not binary or if it contains no data, then the output file is not created.</p></div>
+</div>
+<br>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id140222827334276" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.ExportValueToFile(fieldname: str, filename: str, overwrite: bool): bool</span>
+    </p>
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+    <p id="par_id381701012500605" class="paragraph" dir="auto"><span class="emph">fieldname</span>: The name of the binary field to be exported, as a case-sensitive string.</p>
+    <p id="par_id381701012563717" class="paragraph" dir="auto"><span class="emph">filename</span>: The complete path to the file to be created using the notation defined in the <span class="literal">FileSystem</span>.<span class="literal">FileNaming</span> property.</p>
+    <p id="par_id417011815228395" class="paragraph" dir="auto"><span class="emph">overwrite</span>: Set this argument to <span class="literal">True</span> to allow the destination file to be overwritten (Default = <span class="literal">False</span>).</p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <p id="par_id1001701183010649" class="paragraph" dir="auto">In the example below the dataset contains a field named "Picture" that shall be exported to an image file.</p>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oDataset.ExportValueToFile("Picture", "C:\my_image.png", True)
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      dataset.ExportValueToFile("Picture", r"C:\my_image.png", True)
+    </code></pre></div>
+  
+
+  <a name="GetRows"></a>
+    
+    <a name="bm_id92158910859443"></a>
+      <meta itemprop="keywords" content="Dataset service,GetRows">
+    
+    <h2 id="hd_id201589199660414" dir="auto">GetRows</h2>
+    <p id="par_id93158919349654" class="paragraph" dir="auto">Returns the contents of the dataset in a 2-dimensional array, starting from the first record after the current record.</p>
+    <p id="par_id86170118381308" class="paragraph" dir="auto">After execution, the cursor is positioned at the row that was last read or after the last record in the dataset, in which case the <span class="literal">EOF</span> property returns <span class="literal">True</span>.</p>
+    <p id="par_id86170118381410" class="paragraph" dir="auto">This method can be used to read data from the dataset in chunks, whose size is defined by the <span class="literal">maxrows</span> argument.</p>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id741701183770602" dir="auto">The returned array will always have two dimensions, even if the dataset contains a single column and a single record.</p></div>
+</div>
+<br>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id140222821409276" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.GetRows(header: bool, maxrows: int): any</span>
+    </p>
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+    <p id="par_id381701010547515" class="paragraph" dir="auto"><span class="emph">header</span>: Set this argument to <span class="literal">True</span> to make the first entry in the <span class="literal">Array</span> contain the column headers (Default = <span class="literal">False</span>).</p>
+    <p id="par_id381701012520715" class="paragraph" dir="auto"><span class="emph">maxrows</span>: Defines the maximum number of records to be returned. If the number of existing records is smaller than <span class="literal">maxrows</span>, then the size of the returned array will be equal to the number of remaining records in the dataset. Leave this argument blank or set it to zero to return all rows in the dataset (Default = 0)</p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <p id="par_id171701202610657" class="paragraph" dir="auto">The following example reads a dataset in chunks of 100 rows until all the dataset has been read.</p>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      Dim arrChunk As Variant, lMaxRows As Long
+      lMaxRows = 100
+      Do
+          arrChunk = oDataset.GetRows(MaxRows := lMaxRows)
+          If UBound(arrChunk, 1) &gt;= 0 Then
+              ' ...
+          End If
+      Loop Until UBound(arrChunk, 1) &lt; lMaxRows - 1
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      max_rows = 100
+      chunk = dataset.GetRows(maxrows = max_rows)
+      while len(chunk) &gt; 0:
+          # ...
+          chunk = dataset.GetRows(maxrows = max_rows)
+    </code></pre></div>
+  
+
+  <a name="GetValue"></a>
+    
+    <a name="bm_id92153179971743"></a>
+      <meta itemprop="keywords" content="Dataset service,GetValue">
+    
+    <h2 id="hd_id201589196152051" dir="auto">GetValue</h2>
+    <p id="par_id93190955243864" class="paragraph" dir="auto">Returns the value of the specified field from the current record of the dataset.</p>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id171701181922516" dir="auto">If the specified field is binary, then its length is returned.</p></div>
+</div>
+<br>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id140222825444276" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.GetValue(fieldname: str): any</span>
+    </p>
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+    <p id="par_id381701012554805" class="paragraph" dir="auto"><span class="emph">fieldname</span>: The name of the field to be returned, as a case-sensitive string.</p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      currId = oDataset.GetValue(FieldName := "ID")
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      curr_id = dataset.GetValue(fieldname = "ID")
+    </code></pre></div>
+  
+
+  <a name="Insert"></a>
+    
+    <a name="bm_id92153179527743"></a>
+      <meta itemprop="keywords" content="Dataset service,Insert">
+    
+    <h2 id="hd_id201589196824051" dir="auto">Insert</h2>
+    <p id="par_id93190998043864" class="paragraph" dir="auto">Inserts a new record at the end of the dataset and initialize its fields with the specified values.</p>
+    <p id="par_id941701206804894" class="paragraph" dir="auto">If the primary key of the dataset is an auto value, then this method returns the primary key value of the new record. Otherwise, the method will return 0 (when successful) or -1 (when not successful).</p>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id51701203344601" dir="auto">Updatable fields with unspecified values are initialized with their default values.</p></div>
+</div>
+<br>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id171701181920016" dir="auto">If the specified field is binary, then its length is returned.</p></div>
+</div>
+<br>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id149342825444276" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.Insert(pvargs: any): int</span>
+    </p>
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+    <p id="par_id381701012511805" class="paragraph" dir="auto"><span class="emph">pvargs</span>: A <span class="literal">Dictionary</span> containing pairs of field names and their respective values. Alternatively, an even number of arguments can be specified alternating field names (as a <span class="literal">String</span>) and their values.</p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <p id="par_id641701259882955" class="paragraph" dir="auto">Consider a table named "Customers" with 4 fields: "ID" (<span class="literal">BigInt</span>, auto value and primary key), "Name" (<span class="literal">VarChar</span>), "Age" (<span class="literal">Integer</span>), "City" (<span class="literal">VarChar</span>).</p>
+    <p id="par_id701701205243738" class="paragraph" dir="auto">The example below inserts a new record into this dataset using a <span class="literal">Dictionary</span>.</p>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oDataset = oDatabase.CreateDataset("Customers")
+      oNewData = CreateScriptService("Dictionary")
+      oNewData.Add("Name", "John")
+      oNewData.Add("Age", 50)
+      oNewData.Add("City", "Chicago")
+      lNewID = oDataset.Insert(oNewData)
+    </code></pre></div>
+    <p id="par_id671701260191972" class="paragraph" dir="auto">The same result can be achieved by passing all pairs of fields and values as arguments:</p>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oDataset.Insert("Name", "John", "Age", 50, "City", "Chicago")
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      dataset = database.CreateDataset("Customers")
+      new_data = {"Name": "John", "Age": 30, "City": "Chicago"}
+      new_id = dataset.Insert(new_data)
+    </code></pre></div>
+    <p id="par_id971701261086678" class="paragraph" dir="auto">The following calls are accepted in Python:</p>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      dataset.Insert("Name", "John", "Age", 50, "City", "Chicago")
+      dataset.Insert(Name = "John", Age = 50, City = "Chicago")
+    </code></pre></div>
+  
+
+  <a name="MoveFirstLast"></a>
+    
+    <a name="bm_id92159920571743"></a>
+      <meta itemprop="keywords" content="Dataset service,MoveFirst">
+      <meta itemprop="keywords" content="Dataset service,MoveLast">
+    
+    <h2 id="hd_id201589196153251" dir="auto">MoveFirst / MoveLast</h2>
+    <p id="par_id93190955243874" class="paragraph" dir="auto">Moves the dataset cursor to the first (with <span class="literal">MoveFirst</span>) or to the last (with <span class="literal">MoveLast</span>) record.</p>
+    <p id="par_id411701262609847" class="paragraph" dir="auto">This method returns <span class="literal">True</span> when successful.</p>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id61701280052346" dir="auto">Deleted records are ignored by this method.</p></div>
+</div>
+<br>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id140222825443186" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.MoveFirst(): bool</span>
+    </p>
+    <p id="par_id140231225444276" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.MoveLast(): bool</span>
+    </p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oDataset.MoveFirst()
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      dataset.MoveFirst()
+    </code></pre></div>
+  
+
+  <a name="MoveNextPrevious"></a>
+    
+    <a name="bm_id92157026521743"></a>
+      <meta itemprop="keywords" content="Dataset service,MoveNext">
+      <meta itemprop="keywords" content="Dataset service,MovePrevious">
+    
+    <h2 id="hd_id201589196152099" dir="auto">MoveNext / MovePrevious</h2>
+    <p id="par_id93190955243345" class="paragraph" dir="auto">Moves the dataset cursor forward (with <span class="literal">MoveNext</span>) or backwards (with <span class="literal">MovePrevious</span>) by a given number of records.</p>
+    <p id="par_id411701262609872" class="paragraph" dir="auto">This method returns <span class="literal">True</span> when successful.</p>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id617012800527025" dir="auto">Deleted records are ignored by this method.</p></div>
+</div>
+<br>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id140222825444006" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.MoveNext(offset: int = 1): bool</span>
+    </p>
+    <p id="par_id140222825444394" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.MovePrevious(offset: int = 1): bool</span>
+    </p>
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+    <p id="par_id381701012554644" class="paragraph" dir="auto"><span class="emph">offset</span>: The number of records by which the cursor shall be moved forward or backwards. This argument may be a negative value (Default = 1).</p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oDataset.MoveNext()
+      oDataset.MoveNext(5)
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      dataset.MoveNext()
+      dataset.MoveNext(5)
+    </code></pre></div>
+  
+
+  <a name="Reload"></a>
+    
+    <a name="bm_id92157026521993"></a>
+      <meta itemprop="keywords" content="Dataset service,Reload">
+    
+    <h2 id="hd_id201589196152548" dir="auto">Reload</h2>
+    <p id="par_id93190955243383" class="paragraph" dir="auto">Reloads the dataset from the database. The properties <span class="literal">Filter</span> and <span class="literal">OrderBy</span> may be defined when calling this method.</p>
+    <p id="par_id411701262522872" class="paragraph" dir="auto">This method returns <span class="literal">True</span> when successful.</p>
+    <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id681701263394717" dir="auto">Reloading the dataset is useful when records have been inserted to or deleted from the database. Note that the methods <span class="literal">CreateDataset</span> and <span class="literal">Reload</span> perform similar functions, however <span class="literal">Reload</span> reuses the same <span class="literal">Dataset</span> class instance.</p></div>
+</div>
+<br>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id140222825444506" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.Reload(opt filter: str, opt orderby: str): bool</span>
+    </p>
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+    <p id="par_id381701012509626" class="paragraph" dir="auto"><span class="emph">filter</span>: Specifies the condition that records must match to be included in the returned dataset. This argument is expressed as a SQL <span class="literal">WHERE</span> statement without the "WHERE" keyword. If this argument is not specified, then the filter used in the current dataset is applied, otherwise the current filter is replaced by this argument.</p>
+    <p id="par_id381701012563914" class="paragraph" dir="auto"><span class="emph">orderby</span>: Specifies the ordering of the dataset as a SQL <span class="literal">ORDER BY</span> statement without the "ORDER BY" keyword. If this argument is not specified, then the sorting order used in the current dataset is applied, otherwise the current sorting order is replaced by this argument.</p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oDataset.Reload()
+      oDataset.Reload(Filter := "[Name] = 'John'", OrderBy := "Age")
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      dataset.Reload()
+      dataset.Reload(Filter = "[Name] = 'John'", OrderBy = "Age")
+    </code></pre></div>
+  
+
+  <a name="Update"></a>
+    
+    <a name="bm_id92157026521088"></a>
+      <meta itemprop="keywords" content="Dataset service,Update">
+    
+    <h2 id="hd_id201589196157828" dir="auto">Update</h2>
+    <p id="par_id93190955060783" class="paragraph" dir="auto">Update the values of the specified fields in the current record.</p>
+    <p id="par_id411701262529574" class="paragraph" dir="auto">This method returns <span class="literal">True</span> when successful.</p>
+    <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+    <p id="par_id140222823694506" class="paragraph" dir="auto">
+      <span class="input" data-tooltip="Click on text to copy to clipboard">svc.Update(pvargs: any): bool</span>
+    </p>
+    <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+    <p id="par_id381701012546805" class="paragraph" dir="auto"><span class="emph">pvargs</span>: A <span class="literal">Dictionary</span> containing pairs of field names and their respective values. Alternatively, an even number of arguments can be specified alternating field names (as a <span class="literal">String</span>) and their values.</p>
+    <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+    <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+    <p id="par_id791701264626511" class="paragraph" dir="auto">The example below updates the current record using a <span class="literal">Dictionary</span>.</p>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oNewValues = CreateScriptService("Dictionary")
+      oNewValues.Add("Age", 51)
+      oNewValues.Add("City", "New York")
+      oDataset.Update(oNewValues)
+    </code></pre></div>
+    <p id="par_id221701264980261" class="paragraph" dir="auto">The same result can be achieved by passing all pairs of fields and values as arguments:</p>
+    <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      oDataset.Update("Age", 51, "City", "New York")
+    </code></pre></div>
+    <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      new_values = {"Age": 51, "City": "New York"}
+      dataset.Update(new_values)
+    </code></pre></div>
+    <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      dataset.Update("Age", 51, "City", "New York")
+      dataset.Update(Age = 51, City = "New York")
+    </code></pre></div>
+  
+
+  <div class="embedded">
+<a name="SF_InternalUse"></a>
+      <div class="warning">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id851506659675843" dir="auto">All <span class="literal">ScriptForge</span> Basic routines or identifiers that are prefixed with an underscore character "_" are reserved for internal use. They are not meant be used in Basic macros or Python scripts.</p></div>
+</div>
+<br>
+    </div>
+  <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/sf_database.html"><span class="literal">SFDatabases</span>.<span class="literal">Database</span> service</a></p></div>
+   </div>
+</div>
+</div>
+<div id="DonationFrame"></div>
+<footer><h2 style="text-align: center;"><a href="https://books.libreoffice.org" target="_blank">LibreOffice Books</a></h2>
+<div class="noteicon" dir="auto" style="display:flex;justify-content:center;">
+<img src="media/navigation/libo-writer.svg" alt="Writer Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-calc.svg" alt="Calc Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-impress.svg" alt="Impress Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-draw.svg" alt="Draw Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-base.svg" alt="Base Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-math.svg" alt="Math Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-symbol-black.svg" alt="Getting Started Icon" style="width:60px;height:60px;">
+</div>
+<div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03/sf_dataset.xhp" target="_blank">/text/sbasic/shared/03/sf_dataset.xhp</a></p>
+<p dir="auto">Title is: SFDatabases.Dataset service</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>

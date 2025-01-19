@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<base href="../../../../../">
+<noscript><meta http-equiv="refresh" content="0; URL=../../../../../en-US/noscript.html"></noscript>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>SFDocuments.FormDocument service</title>
+<link rel="shortcut icon" href="media/navigation/favicon.ico">
+<link type="text/css" href="normalize.css" rel="Stylesheet">
+<link type="text/css" href="prism.css" rel="Stylesheet">
+<link type="text/css" href="default.css" rel="Stylesheet">
+<script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="languages.js"></script><script type="text/javascript" src="en-US/langnames.js"></script><script type="text/javascript" src="flexsearch.debug.js"></script><script type="text/javascript" src="prism.js"></script><script type="text/javascript" src="help2.js" defer></script><script type="text/javascript" src="a11y-toggle.js" defer></script><script type="text/javascript" src="paginathing.js" defer></script><script type="text/javascript" src="en-US/bookmarks.js" defer></script><script type="text/javascript" src="en-US/contents.js" defer></script><script type="text/javascript" src="help.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<header id="TopLeftHeader"><a class="symbol" href="en-US/text/shared/05/new_help.html"><div></div></a><a class="logo" href="en-US/text/shared/05/new_help.html"><p dir="auto">LibreOffice 24.8 Help</p></a><div class="dropdowns"><div class="modules">
+<button type="button" data-a11y-toggle="modules-nav" id="modules" aria-haspopup="true" aria-expanded="false" aria-controls="modules-nav">Module</button><nav id="modules-nav" hidden=""></nav>
+</div></div></header><aside class="leftside"><input id="accordion-1" name="accordion-menu" type="checkbox"><label for="accordion-1" dir="auto">Contents</label><div id="Contents" class="contents-treeview"></div></aside><div id="SearchFrame"><div id="Bookmarks">
+<input id="search-bar" type="search" class="search" placeholder="Search in bookmarks for chosen module" dir="auto"><div class="nav-container" tabindex="0"><nav class="index" dir="auto"></nav></div>
+</div></div>
+<div id="DisplayArea" itemprop="softwareHelp" itemscope="true" itemtype="http://schema.org/SoftwareApplication">
+  <a name="bm_id41582391760252"></a>
+    <meta itemprop="keywords" content="FormDocument service">
+  
+
+  <a name="abstract"></a>
+    <h1 id="bm_id781582391760253" dir="auto">
+<a name="ctrls_h1"></a><span class="literal">SFDocuments</span>.<span class="literal">FormDocument</span> service</h1>
+    <p id="par_id321692486382326" class="paragraph" dir="auto">The <span class="literal">FormDocument</span> service allows to access form documents stored in LibreOffice Base documents.</p>
+    <p id="par_id621692487292145" class="paragraph" dir="auto">In a Base document, existing form documents can be viewed by selecting <span class="menuitem">View - Forms</span> in the user interface. Each form document may be composed of one or more forms, including the main form and other sub-forms.</p>
+  
+  <p id="par_id891692486448415" class="paragraph" dir="auto">This service inherits methods and properties from the <span class="literal">Document</span> service and is often used alongside the <span class="literal">Base</span> and <span class="literal">Database</span> services.</p>
+  <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id241619032941497" dir="auto">Refer to the <a target="_top" href="en-US/text/sbasic/shared/03/sf_document.html"><span class="literal">Document</span> service</a> to learn more about methods and properties that can be used to manage LibreOffice documents.</p></div>
+</div>
+<br>
+
+  <h2 id="hd_id581582885621841" dir="auto">Service invocation</h2>
+  <p id="par_id141609955500101" class="paragraph" dir="auto">Before using the <span class="literal">FormDocument</span> service the <span class="literal">ScriptForge</span> library needs to be loaded or imported:</p>
+  <div class="embedded">
+<a name="importLibs"></a>
+    <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id901528999850603" dir="auto">• Basic macros require to load <span class="literal">ScriptForge</span> library using the following statement:<br><span class="literal">GlobalScope.BasicLibraries.loadLibrary("ScriptForge")</span><br><br>• Python scripts require an import from <span class="literal">scriptforge</span> module:<br><span class="literal">from scriptforge import CreateScriptService</span>
+    </p></div>
+</div>
+<br>
+  </div>
+
+  <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+  <p id="par_id991692486784449" class="paragraph" dir="auto">A <span class="literal">FormDocument</span> service instance can be created by calling the method <span class="literal">OpenFormDocument</span> that exists both in the <span class="literal">Base</span> and <span class="literal">Database</span> services.</p>
+  <p id="par_id381692486890118" class="paragraph" dir="auto">The example below uses the <span class="literal">UI</span> service to open a Base document and then retrieve a form document. Note that in this example both the Base document and the form document will be opened and displayed on the screen.</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    Dim ui As Object, oBase As Object, oFormDoc As Object
+    ui = CreateScriptService("UI")
+    oBase = ui.OpenBaseDocument("C:\Documents\MyDatabase.odb")
+    oFormDoc = oBase.OpenFormDocument("MyFormDocument")
+    ' ...
+    oFormDoc.CloseDocument()
+  </code></pre></div>
+  <p id="par_id591692487747857" class="paragraph" dir="auto">The following example uses the <span class="literal">Database</span> service to open the form document. In this case, the Base file will not be opened and only the form document will be shown.</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    Dim oDatabase As Object, oFormDoc As Object
+    oDatabase = CreateScriptService("Database", "C:\Documents\MyDatabase.odb")
+    oFormDoc = oDatabase.OpenFormDocument("MyFormDocument")
+  </code></pre></div>
+  <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id151692489140384" dir="auto">Calling <span class="literal">OpenFormDocument</span> for a form document that is already open will activate the document window and bring it to focus.</p></div>
+</div>
+<br>
+
+  <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+  <p id="par_id871623102536956" class="paragraph" dir="auto">The examples above can be translated to Python as follows:</p>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    ui = CreateScriptService("UI")
+    baseDoc = ui.OpenBaseDocument("C:\Documents\MyDatabase.odb")
+    formDoc = baseDoc.OpenFormDocument("MyFormDocument")
+    # ...
+    formDoc.CloseDocument()
+  </code></pre></div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    database = CreateScriptService("Database", "C:\Documents\MyDatabase.odb")
+    formDoc = database.OpenFormDocument("MyFormDocument")
+  </code></pre></div>
+
+  <a name="methods_toc"></a>
+  <table border="1" class="" cellpadding="0" cellspacing="0">
+   <tr>
+       <th rowspan="" colspan="3" class="tableheadcell" dir="auto">
+           <p id="par_id451619034669263" class="tableheadintable" dir="auto">List of Methods in the FormDocument Service</p>
+       </th>
+   </tr>
+   <tr>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id981619034669263" class="tablecontentintable" dir="auto">
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_formdocument.html#CloseDocument">CloseDocument</a><br>
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_formdocument.html#Forms">Forms</a><br>
+           </p>
+       </td>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id721619034669263" class="tablecontentintable" dir="auto">
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_formdocument.html#GetDatabase">GetDatabase</a><br><br>
+           </p>
+       </td>
+       <td rowspan="" colspan="" dir="auto">
+           <p id="par_id711619034669263" class="tablecontentintable" dir="auto">
+             <a target="_top" href="en-US/text/sbasic/shared/03/sf_formdocument.html#PrintOut">PrintOut</a><br><br>
+           </p>
+       </td>
+   </tr>
+  </table>
+<br>
+  
+
+<a name="CloseDocument"></a>
+  
+  <a name="bm_id341609135528912"></a>
+    <meta itemprop="keywords" content="FormDocument service,CloseDocument">
+  
+  <h2 id="hd_id61161309632927" dir="auto">CloseDocument</h2>
+  <p id="par_id801916099743199" class="paragraph" dir="auto">Closes the form document referred to by the <span class="literal">FormDocument</span> instance. Returns <span class="literal">True</span> if the form document was successfully closed.</p>
+  <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+  <p id="par_id71613205516650" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">svc.CloseDocument(): bool</span>
+  </p>
+  <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+  <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    oFormDoc.CloseDocument()
+  </code></pre></div>
+  <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    formDoc.CloseDocument()
+  </code></pre></div>
+
+
+<a name="Forms"></a>
+  
+  <a name="bm_id401619035409457"></a>
+    <meta itemprop="keywords" content="FormDocument service,Forms">
+  
+  <h2 id="hd_id841619035592745" dir="auto">Forms</h2>
+  <p id="par_id481619036833610" class="paragraph" dir="auto">Returns either an array with the names of the main forms contained in the form document or a <span class="literal">Form</span> service instance referring to a specific form.</p>
+  <p id="par_id311692532433990" class="paragraph" dir="auto">Call this method without arguments to obtain a zero-based string array with the names of all forms contained in the form document.</p>
+  <p id="par_id491692532525080" class="paragraph" dir="auto">Provide a form name or index as argument to obtain a <span class="literal">Form</span> service instance corresponding to the specified form.</p>
+  <div class="note">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/note.svg" alt="note" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id281692532725116" dir="auto">A form document has at least one main form. More complex form documents may be composed of more than one form and sub-forms.</p></div>
+</div>
+<br>
+  <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+  <p id="par_id401623103182304" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">svc.Forms(): str[0..*]</span>
+  </p>
+  <p id="par_id91692538279673" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">svc.Forms(form: str): svc</span>
+  </p>
+  <p id="par_id91692538279664" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">svc.Forms(form: int): svc</span>
+  </p>
+  <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+  <p id="par_id211692538352686" class="paragraph" dir="auto"><span class="emph">form</span>: This argument can be either a string with the name of a form that exists in the form document or the zero-based index of the form that shall be returned. If this argument is not specific, then an array with the name of all available forms is returned.</p>
+  <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+  <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+  <p id="par_id151692537703209" class="paragraph" dir="auto">The following example checks if the form document contains a form named "MainForm":</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    arrForms = oFormDoc.Forms()
+    If SF_Array.Contains(arrForms, "MainForm") Then
+        ' ...
+    End If
+  </code></pre></div>
+  <p id="par_id661692537831637" class="paragraph" dir="auto">The example below retrieves the form named "MainForm" and moves it to the last record:</p>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    Dim oForm As Object
+    oForm = oFormDoc.Forms("MainForm")
+    oForm.MoveLast()
+  </code></pre></div>
+  <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    arrForms = formDoc.Forms()
+    if "MainForm" in arrForms:
+        # ...
+  </code></pre></div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    form = formDoc.Forms("MainForm")
+    form.MoveLast()
+  </code></pre></div>
+  <div class="tip">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/tip.svg" alt="tip" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id921619036922844" dir="auto">To learn more about form methods and properties, refer to the <a target="_top" href="en-US/text/sbasic/shared/03/sf_form.html"><span class="literal">Form</span> service help page</a>.</p></div>
+</div>
+<br>
+
+
+<a name="GetDatabase"></a>
+   
+   <a name="bm_id941616861134691"></a>
+      <meta itemprop="keywords" content="FormDocument service,GetDatabase">
+   
+   <div class="embedded">
+<a name="getDbContent"></a>
+   <h3 id="hd_id141616861134554" dir="auto">GetDatabase</h3>
+   <p id="par_id291616861407907" class="paragraph" dir="auto">Return a <a target="_top" href="en-US/text/sbasic/shared/03/sf_database.html"><span class="literal">SFDatabases</span>.<span class="literal">Database</span></a> instance giving access to the execution of SQL commands on the database the current form is connected to and/or that is stored in the current Base document.</p>
+   <p id="par_id991616861417207" class="paragraph" dir="auto">Each form has its own database connection, except in Base documents where they all share the same connection.</p>
+   <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+   <p id="par_id221622547947693" class="paragraph" dir="auto"><span class="input" data-tooltip="Click on text to copy to clipboard">svc.GetDatabase(opt user: str, opt password: str): svc</span></p>
+   <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+   <p id="par_id701616861134906" class="paragraph" dir="auto"><span class="emph">user, password</span>: The login optional parameters (Default = "").</p>
+   <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+   <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+      Dim myDb As Object ' SFDatabases.Database
+      Set myDb = oForm.GetDatabase()
+   </code></pre></div>
+   <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+   <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+      db = form.GetDatabase()  # SFDatabases.Database
+   </code></pre></div>
+  </div>
+
+
+<a name="PrintOut"></a>
+  
+  <a name="bm_id721985200121249"></a>
+    <meta itemprop="keywords" content="FormDocument service,PrintOut">
+  
+  <h2 id="hd_id261589202101415" dir="auto">PrintOut</h2>
+  <p id="par_id156589200121138" class="paragraph" dir="auto">This method sends the contents form document to the default printer or to the printer defined by the <span class="literal">SetPrinter()</span> method.</p>
+  <p id="par_id981611169416934" class="paragraph" dir="auto">Returns <span class="literal">True</span> if the document was successfully sent to the printer.</p>
+  <div class="embedded">
+<a name="functsyntax"></a>
+<h3 id="hd_id061420171139089682" dir="auto">Syntax:</h3>
+</div>
+  <p id="par_id1001622827822169" class="paragraph" dir="auto">
+    <span class="input" data-tooltip="Click on text to copy to clipboard">svc.PrintOut(pages: str = "", copies: int = 1, printbackground: bool = true, printblankpages: bool = false, printevenpages: bool = true, printoddpages: bool = true, printimages: bool = true): bool</span>
+  </p>
+  <div class="embedded">
+<a name="functparameters"></a>
+<h3 id="hd_id061420171139084157" dir="auto">Parameters:</h3>
+</div>
+  <p id="par_id211635436910093" class="paragraph" dir="auto"><span class="emph">pages</span>: The pages to print as a string. This argument should be specified in the same manner as in the user interface (see <span class="menuitem">File - Print</span> dialog). Example: "1-4;10;15-18". The default value is an empty string "" which will cause all pages to be printed.</p>
+  <p id="par_id141635436912146" class="paragraph" dir="auto"><span class="emph">copies</span>: The number of copies to be printed (Default = 1).</p>
+  <p id="par_id871692539875337" class="paragraph" dir="auto"><span class="emph">printbackground</span>: specifies whether the background image should be printed (Default = True).</p>
+  <p id="par_id661692539947123" class="paragraph" dir="auto"><span class="emph">printblankpages</span>: specifies whether blank pages should be printed (Default = False).</p>
+  <p id="par_id661692539947144" class="paragraph" dir="auto"><span class="emph">printevenpages</span>: specifies whether even pages should be printed (Default = True).</p>
+  <p id="par_id661692539947875" class="paragraph" dir="auto"><span class="emph">printoddpages</span>: specifies whether odd pages should be printed (Default = True).</p>
+  <p id="par_id661692539947323" class="paragraph" dir="auto"><span class="emph">printimages</span>: specifies whether images should be printed (Default = True).</p>
+  <div class="embedded">
+<a name="functexample"></a>
+<h3 id="hd_id061420171139088233" dir="auto">Example:</h3>
+</div>
+  <div class="embedded">
+<a name="In_Basic"></a>
+<h5 id="hd_id191620312698501" dir="auto">In Basic</h5>
+</div>
+  <div class="bascode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-visual-basic line-numbers">
+    oFormDoc.PrintOut("1-4", Copies := 2, PrintBackground := False)
+  </code></pre></div>
+  <div class="embedded">
+<a name="In_Python"></a>
+<h5 id="hd_id831620312769993" dir="auto">In Python</h5>
+</div>
+  <div class="pycode" itemscope="true" itemtype="http://schema.org/SoftwareSourceCode" itemprop="codeSampleType" content="snippet" data-tooltip="Click on text to copy to clipboard"><pre dir="auto"><code class="language-python line-numbers">
+    formDoc.PrintOut("1-4", copies = 2, printbackground = False)
+  </code></pre></div>
+
+
+  <div class="embedded">
+<a name="SF_InternalUse"></a>
+      <div class="warning">
+<div class="noteicon" dir="auto"><img src="media/icon-themes/res/helpimg/warning.svg" alt="warning" style="width:40px;height:40px;"></div>
+<div class="notetext"><p id="par_id851506659675843" dir="auto">All <span class="literal">ScriptForge</span> Basic routines or identifiers that are prefixed with an underscore character "_" are reserved for internal use. They are not meant be used in Basic macros or Python scripts.</p></div>
+</div>
+<br>
+    </div>
+  <a name="relatedtopics"></a><div class="relatedtopics">
+<p class="related" itemprop="mentions" dir="auto"><a name="related"></a><span class="emph">Related Topics</span>
+</p>
+<div class="relatedbody" itemprop="mentions">
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/sf_base.html"><span class="literal">SFDocuments</span>.<span class="literal">Base</span> service</a></p></div>
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/sf_database.html"><span class="literal">SFDatabases</span>.<span class="literal">Database</span> service</a></p></div>
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/sf_document.html"><span class="literal">SFDocuments</span>.<span class="literal">Document</span> service</a></p></div>
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/sf_form.html"><span class="literal">SFDocuments</span>.<span class="literal">Form</span> service</a></p></div>
+    <div class="embedded"><p class="embedded" dir="auto"><a target="_top" href="en-US/text/sbasic/shared/03/sf_ui.html"><span class="literal">ScriptForge</span>.<span class="literal">UI</span> service</a></p></div>
+   </div>
+</div>
+
+  </div>
+<div id="DonationFrame"></div>
+<footer><h2 style="text-align: center;"><a href="https://books.libreoffice.org" target="_blank">LibreOffice Books</a></h2>
+<div class="noteicon" dir="auto" style="display:flex;justify-content:center;">
+<img src="media/navigation/libo-writer.svg" alt="Writer Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-calc.svg" alt="Calc Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-impress.svg" alt="Impress Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-draw.svg" alt="Draw Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-base.svg" alt="Base Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-math.svg" alt="Math Icon" style="width:60px;height:60px;"><img src="media/navigation/libo-symbol-black.svg" alt="Getting Started Icon" style="width:60px;height:60px;">
+</div>
+<div id="DEBUG" class="debug">
+<h3 class="bug">Help content debug info:</h3>
+<p dir="auto">This page is: <a href="https://opengrok.libreoffice.org/xref/help/source/text/sbasic/shared/03/sf_formdocument.xhp" target="_blank">/text/sbasic/shared/03/sf_formdocument.xhp</a></p>
+<p dir="auto">Title is: SFDocuments.FormDocument service</p>
+<p id="bm_module" dir="auto"></p>
+<p id="bm_system" dir="auto"></p>
+<p id="bm_HID" dir="auto"></p>
+</div></footer>
+</body>
+</html>
