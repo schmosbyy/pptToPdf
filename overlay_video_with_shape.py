@@ -7,6 +7,12 @@ from pptx import Presentation
 from extract_video_url import extract_video_urls_from_pptx
 import random
 import re
+from libreoffice import convert_to_pdf 
+
+# Directory paths
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_DIR = os.path.join(BASE_DIR, "output")
+LIBREOFFICE_DIR = os.path.join(BASE_DIR, "libreoffice")
 
 # Helper function to convert EMUs to Inches
 def emu_to_inches(emu):
@@ -98,19 +104,40 @@ def overlay_video_with_shape(pptx_directory, output_directory, extracted_video_u
                     
             # List and print all media shapes for the current slide
             media_shapes_info = list_media_shapes(slide)
-            print(f"Media shapes found on slide {slide_num}: {media_shapes_info}")
+            # print(f"Media shapes found on slide {slide_num}: {media_shapes_info}")
             
             # Iterate over each media shape and overlay the transparent rectangle using its position, width, and height
             for media in media_shapes_info:
+
+
                 left, top = media['Position']
                 width, height = media['Width'], media['Height']
                 
-                # Add the transparent shape using the position, width, and height of the media shape
+                # Add the transparent rectangle using the position, width, and height of the media shape
                 shape = slide.shapes.add_shape(
                     1,  # Rectangle shape
                     Inches(left / 914400), Inches(top / 914400), Inches(width / 914400), Inches(height / 914400)
                 )
                 shape.fill.background()  # Transparent fill
+                
+                # Add an isosceles triangle to represent the play button
+                triangle_width = Inches(1)  # Width of the triangle (play button)
+                triangle_height = Inches(1)  # Height of the triangle (play button)
+                
+                # Calculate the position to center the triangle inside the rectangle
+                triangle_left = Inches(left / 914400) + Inches(width / 914400)/2 - triangle_width/2
+                triangle_top = Inches(top / 914400) + Inches(height / 914400 )/2 - triangle_height/2
+                
+                # Create the isosceles triangle shape (play button)
+                play_button = slide.shapes.add_shape(
+                    7,  # Isosceles triangle shape
+                    triangle_left, triangle_top, triangle_width, triangle_height
+                )
+                play_button.fill.solid()  # Solid color for the triangle
+                play_button.fill.fore_color.rgb = RGBColor(0, 0, 0)  # Black color for the play button (can change color)
+                
+                # Rotate the triangle 90 degrees to make it point to the right
+                play_button.rotation = 90  # Rotate the triangle to the right
 
                 # Set hyperlink to the extracted video URL for the current slide
                 video_link = video_url
@@ -120,12 +147,21 @@ def overlay_video_with_shape(pptx_directory, output_directory, extracted_video_u
         # Save the modified presentation
         presentation.save(output_file)
 
-# Directory containing PPTX files
-pptx_directory = "ppt"
-output_directory = "output"
+def main():
+    pptx_directory = "ppt"
+    output_directory = "output"
 
-# Extract video URLs
-extracted_video_urls = extract_video_urls_from_pptx(pptx_directory)
+    extracted_video_urls = extract_video_urls_from_pptx(pptx_directory)
 
-# Overlay transparent shapes on slides with video URLs
-overlay_video_with_shape(pptx_directory, output_directory, extracted_video_urls)
+    overlay_video_with_shape(pptx_directory, output_directory, extracted_video_urls)
+
+    # After processing the PPTX files, call the convert_to_pdf function from libreoffice_conversion.py
+    for filename in os.listdir(output_directory):
+        if filename.endswith(".pptx"):
+            input_path = os.path.join(output_directory, filename)
+            convert_to_pdf(input_path)  # Calling the function to convert the PPTX to PDF
+
+    print(f"All conversions completed. PDFs saved in {output_directory}")
+
+if __name__ == "__main__":
+    main()

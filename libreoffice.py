@@ -1,13 +1,11 @@
 import os
 import subprocess
 import platform
-import shutil
 
 
 # Directory paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
-PDF_DIR = os.path.join(BASE_DIR, "pdf")
 LIBREOFFICE_DIR = os.path.join(BASE_DIR, "libreoffice")
 
 
@@ -24,29 +22,37 @@ def get_libreoffice_path():
         raise RuntimeError(f"Unsupported operating system: {system}")
 
 
-def convert_to_pdf(input_file, output_dir):
+def convert_to_pdf(input_file):
     """Convert a single PPTX file to PDF using LibreOffice."""
     libreoffice_path = get_libreoffice_path()
     cmd = [
         libreoffice_path,
         "--headless",  # Run in headless mode (no GUI)
         "--convert-to", "pdf",  # Convert to PDF format
-        "--outdir", output_dir,  # Output directory
+        "--outdir", OUTPUT_DIR,  # Save PDF in the output directory
         input_file,  # Input file
     ]
     try:
         subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        print(f"Converted: {input_file} -> {output_dir}")
+        print(f"Converted: {input_file} -> {OUTPUT_DIR}")
+
+        # Check if the PDF file has been created
+        pdf_file = input_file.replace(".pptx", ".pdf")
+        if os.path.exists(pdf_file):
+            print(f"PDF created: {pdf_file}")
+            # Delete the .pptx file after conversion
+            os.remove(input_file)
+            print(f"Deleted original PPTX file: {input_file}")
+        else:
+            print(f"PDF not created for: {input_file}")
     except subprocess.CalledProcessError as e:
         print(f"Failed to convert {input_file}: {e.stderr.decode('utf-8')}")
 
 
 def ensure_directories():
-    """Ensure the output and PDF directories exist."""
+    """Ensure the output directory exists."""
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)
-    if not os.path.exists(PDF_DIR):
-        os.makedirs(PDF_DIR)
 
 
 def main():
@@ -62,9 +68,9 @@ def main():
     for filename in os.listdir(OUTPUT_DIR):
         if filename.endswith(".pptx"):
             input_path = os.path.join(OUTPUT_DIR, filename)
-            convert_to_pdf(input_path, PDF_DIR)
+            convert_to_pdf(input_path)
 
-    print(f"All conversions completed. PDFs saved to {PDF_DIR}")
+    print(f"All conversions completed. PDFs saved in {OUTPUT_DIR}")
 
 
 if __name__ == "__main__":
